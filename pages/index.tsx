@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>GraphQL - welcome</title>
+        <title>GraphQL - Welcome</title>
       </Head>
       <main className="min-h-full">
         <h2 className="text-3xl">Welcome</h2>
