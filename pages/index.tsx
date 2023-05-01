@@ -1,8 +1,12 @@
-import { signIn, signUp } from "@/auth/firebaseAuth";
+import { logOut, signIn, signUp } from "@/auth/firebaseAuth";
+import { selectAuth } from "@/redux/auth";
+import { useAppSelector } from "@/redux/hooks";
 import Head from "next/head";
 import Link from "next/link";
 
 export default function Home() {
+  const { isAuth, userEmail } = useAppSelector(selectAuth);
+
   const signUpTest = async () => {
     const res = await signUp("test@email.com", "12345678");
     console.log(res);
@@ -10,6 +14,11 @@ export default function Home() {
 
   const signInTest = async () => {
     const res = await signIn("test@email.com", "12345678");
+    console.log(res);
+  };
+
+  const logOutTest = async () => {
+    const res = await logOut();
     console.log(res);
   };
 
@@ -28,7 +37,13 @@ export default function Home() {
 
         <div className="flex flex-col gap-2">
           <button onClick={signUpTest}>Sign Up</button>
-          <button onClick={signInTest}>Sign In</button>
+          {isAuth ? (
+            <button onClick={logOutTest}>Log out</button>
+          ) : (
+            <button onClick={signInTest}>Sign In</button>
+          )}
+
+          <div>{userEmail}</div>
         </div>
       </main>
     </>
