@@ -1,3 +1,12 @@
+import Head from "next/head";
+
 export default function SignInPage() {
-  return <main>Sign in</main>;
+  return (
+    <>
+      <Head>
+        <title>GraphQL - Sign in</title>
+      </Head>
+      <main>Sign in</main>
+    </>
+  );
 }
