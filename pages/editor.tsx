@@ -1,3 +1,10 @@
+import Header from "@/components/Header";
+
 export default function EditorPage() {
-  return <main>Editor Page</main>;
+  return (
+    <>
+      <Header />
+      <main>Editor Page</main>
+    </>
+  );
 }
