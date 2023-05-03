@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "./store";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { RootState } from './store';
 
 interface IAuth {
   isAuth: boolean;
@@ -9,7 +9,7 @@ interface IAuth {
 const initialState: IAuth = { isAuth: false };
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     setIsAuth: (state, { payload }: PayloadAction<IAuth>) => {

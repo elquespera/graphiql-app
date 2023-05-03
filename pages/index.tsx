@@ -1,19 +1,19 @@
-import { logOut, signIn, signUp } from "@/auth/firebaseAuth";
-import { selectAuth } from "@/redux/auth";
-import { useAppSelector } from "@/redux/hooks";
-import Head from "next/head";
-import Link from "next/link";
+import { logOut, signIn, signUp } from '@/auth/firebaseAuth';
+import { selectAuth } from '@/redux/auth';
+import { useAppSelector } from '@/redux/hooks';
+import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   const { isAuth, userEmail } = useAppSelector(selectAuth);
 
   const signUpTest = async () => {
-    const res = await signUp("test@email.com", "12345678");
+    const res = await signUp('test@email.com', '12345678');
     console.log(res);
   };
 
   const signInTest = async () => {
-    const res = await signIn("test@email.com", "12345678");
+    const res = await signIn('test@email.com', '12345678');
     console.log(res);
   };
 

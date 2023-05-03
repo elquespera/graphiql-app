@@ -1,13 +1,13 @@
-import { setIsAuth } from "@/redux/auth";
-import { store } from "@/redux/store";
+import { setIsAuth } from '@/redux/auth';
+import { store } from '@/redux/store';
 import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-} from "firebase/auth";
-import firebaseApp from "./firebaseConfig";
+} from 'firebase/auth';
+import firebaseApp from './firebaseConfig';
 
 const auth = getAuth(firebaseApp);
 
