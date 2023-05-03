@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { authReducer } from './auth';
-import { graphQlResponseSlice } from "./graphQlResponse";
-import { graphQlQueryReducer } from "./graphQlQuery";
+import { graphQlResponseSlice } from './graphQlResponse';
+import { graphQlQueryReducer } from './graphQlQuery';
 
 export const store = configureStore({
   reducer: {

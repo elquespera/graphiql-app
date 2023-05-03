@@ -1,14 +1,12 @@
-import { setQueryBody } from "@/redux/graphQlQuery";
-import { useAppDispatch } from "@/redux/hooks";
-import React, { useState } from "react";
+import { setQueryBody } from '@/redux/graphQlQuery';
+import { useAppDispatch } from '@/redux/hooks';
+import React, { useState } from 'react';
 
 export default function Operations() {
   const dispatch = useAppDispatch();
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
-  const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
-    event
-  ) => {
+  const handleChange: React.ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     setValue(event.target.value);
   };
 
