@@ -1,22 +1,33 @@
 import { selectGraphQlQuery } from '@/redux/graphQlQuery';
 import { useGraphQLMutation } from '@/redux/graphQlResponse';
 import { useAppSelector } from '@/redux/hooks';
-import { useEffect } from 'react';
 
 export default function Response() {
   const query = useAppSelector(selectGraphQlQuery);
+  const [queryGraphQL, { data, error, isError, isLoading }] = useGraphQLMutation();
 
-  const [queryGraphQL, response] = useGraphQLMutation();
+  const errorMsg = error && 'data' in error ? JSON.stringify(error.data) : '';
 
-  useEffect(() => {
+  const handleSubmit = () => {
     queryGraphQL(query);
-  }, [query, queryGraphQL]);
+  };
 
   return (
-    <div className="flex-1 p-4 flex flex-col">
+    <div className="flex-1 p-4 flex flex-col overflow-hidden">
       <h1>Response</h1>
-      <div className="flex-1 overflow-y-scroll mt-2 overflow-hidden break-all">
-        {response.data ? JSON.stringify(response.data) : 'Not fetched'}
+      <div className="flex flex-col">
+        <button onClick={handleSubmit} className="bg-slate-100 text-slate-800 p-2">
+          Submit
+        </button>
+        <div className="mt-2 break-all overflow-y-scroll">
+          {isLoading
+            ? 'Loading...'
+            : isError
+            ? errorMsg
+            : data
+            ? JSON.stringify(data)
+            : 'Click Submit to fetch data'}
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { IGraphQLQuery } from '@/types/types';
+import { QUERY_EXAMPLE, VARIABLES_EXAMPLE } from '@/constants/queryExample';
 
-const initialState: IGraphQLQuery = { query: '' };
+const initialState: IGraphQLQuery = {
+  query: QUERY_EXAMPLE,
+  variables: VARIABLES_EXAMPLE,
+};
 
 export const graphQlQuerySlice = createSlice({
   name: 'graphQlQuery',
@@ -23,7 +27,7 @@ export const graphQlQuerySlice = createSlice({
   },
 });
 
-export const { setQuery, setQueryBody } = graphQlQuerySlice.actions;
+export const { setQuery, setQueryBody, setQueryVariables } = graphQlQuerySlice.actions;
 
 export const selectGraphQlQuery = (state: RootState) => state.graphQlQuery;
 
