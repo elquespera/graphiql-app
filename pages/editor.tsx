@@ -1,6 +1,4 @@
 import Documentation from '@/components/Documentation';
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
 import Operations from '@/components/Operations';
 import Response from '@/components/Response';
 import Variables from '@/components/Variables';
@@ -13,8 +11,6 @@ export default function EditorPage() {
         <title>GraphQL - Query Editor</title>
       </Head>
 
-      <Header />
-
       <main className="w-screen my-12 bg-slate-900 text-slate-300 ">
         <div className="flex flex-col sm:flex-row gap-2 h-[calc(100vh-6rem)] justify-between">
           <Documentation />
@@ -26,8 +22,6 @@ export default function EditorPage() {
           <Response />
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }
