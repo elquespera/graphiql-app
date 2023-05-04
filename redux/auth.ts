@@ -1,10 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
-
-interface IAuth {
-  isAuth: boolean;
-  userEmail?: string | null;
-}
+import { IAuth } from '@/types/types';
 
 const initialState: IAuth = { isAuth: false };
 
