@@ -22,7 +22,7 @@ export const graphQlQuerySlice = createSlice({
     },
 
     setQueryVariables: (state, { payload }: PayloadAction<string>) => {
-      state.query = payload;
+      state.variables = payload;
     },
   },
 });
