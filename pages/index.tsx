@@ -1,10 +1,15 @@
 import { logOut, signIn, signUp } from '@/auth/firebaseAuth';
 import { selectAuth } from '@/redux/auth';
 import { useAppSelector } from '@/redux/hooks';
+import { GetServerSideProps } from 'next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import Link from 'next/link';
 
 export default function Home() {
+  const { t } = useTranslation();
+
   const { isAuth, userEmail } = useAppSelector(selectAuth);
 
   const signUpTest = async () => {
@@ -30,7 +35,7 @@ export default function Home() {
       <main className="min-h-full">
         <h2 className="text-3xl">Welcome</h2>
         <div className="flex gap-4">
-          <Link href="/sign-in">Sign in</Link>
+          <Link href="/sign-in">{t('sign-in')}</Link>
           <Link href="/sign-up">Sign up</Link>
           <Link href="/editor">Editor</Link>
         </div>
@@ -49,3 +54,12 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  const translations = await serverSideTranslations(locale || 'en');
+  return {
+    props: {
+      ...translations,
+    },
+  };
+};
