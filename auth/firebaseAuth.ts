@@ -51,7 +51,5 @@ export async function logOut() {
 }
 
 export function onAuthChanged(listener: (user: User | null) => void) {
-  onAuthStateChanged(auth, (user) => {
-    listener(user);
-  });
+  onAuthStateChanged(auth, (user) => listener(user));
 }

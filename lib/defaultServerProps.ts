@@ -1,8 +1,5 @@
 import { storeWrapper } from '@/redux/store';
-import { GetServerSideProps } from 'next';
 
-const defaultServerProps: GetServerSideProps = storeWrapper.getServerSideProps(() => async () => {
-  return { props: {} };
-});
+const defaultServerProps = storeWrapper.getServerSideProps(() => async () => ({ props: {} }));
 
 export default defaultServerProps;
