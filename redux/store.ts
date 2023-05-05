@@ -2,10 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { authReducer } from './auth';
 import { graphQlResponseSlice } from './graphQlResponse';
 import { graphQlQueryReducer } from './graphQlQuery';
+import { settingsReducer } from './settings';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    settings: settingsReducer,
     graphQlQuery: graphQlQueryReducer,
     [graphQlResponseSlice.reducerPath]: graphQlResponseSlice.reducer,
   },

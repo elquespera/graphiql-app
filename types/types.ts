@@ -3,6 +3,10 @@ export interface IAuth {
   userEmail?: string | null;
 }
 
+export interface ISettings {
+  language: AppLanguage;
+}
+
 export interface IGraphQLQuery {
   query: string;
   variables?: string;
