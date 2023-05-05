@@ -1,12 +1,12 @@
 import { logOut, signIn, signUp } from '@/auth/firebaseAuth';
 import LanguageSwitch from '@/components/LanguageSwitch';
+import useTranslation from '@/hooks/useTranslation';
 import { selectAuth } from '@/redux/auth';
 import { useAppSelector } from '@/redux/hooks';
-import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
 
 export default function Home() {
-  const { t } = useTranslation();
+  const t = useTranslation();
 
   const { isAuth, userEmail } = useAppSelector(selectAuth);
 
