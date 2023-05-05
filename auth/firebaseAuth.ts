@@ -1,11 +1,10 @@
-import { setIsAuth } from '@/redux/auth';
-import { store } from '@/redux/store';
 import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  User,
 } from 'firebase/auth';
 import firebaseApp from './firebaseConfig';
 
@@ -51,6 +50,8 @@ export async function logOut() {
   return { result, error };
 }
 
-onAuthStateChanged(auth, (user) => {
-  store.dispatch(setIsAuth({ isAuth: !!user, userEmail: user?.email }));
-});
+export function onAuthChanged(listener: (user: User | null) => void) {
+  onAuthStateChanged(auth, (user) => {
+    listener(user);
+  });
+}

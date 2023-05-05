@@ -33,6 +33,8 @@
     "@reduxjs/toolkit": "^1.9.5",
     "firebase": "^9.21.0",
     "next": "13.3.4",
+    "next-redux-cookie-wrapper": "^2.2.1",
+    "next-redux-wrapper": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-firebase-hooks": "^5.1.1",

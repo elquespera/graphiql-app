@@ -2,8 +2,15 @@ import { PropsWithChildren } from 'react';
 
 import Header from './Header';
 import Footer from './Footer';
+import { onAuthChanged } from '@/auth/firebaseAuth';
+import { useAppDispatch } from '@/redux/hooks';
+import { setIsAuth } from '@/redux/auth';
 
 export default function Layout({ children }: PropsWithChildren) {
+  const dispatch = useAppDispatch();
+
+  onAuthChanged((user) => dispatch(setIsAuth({ isAuth: !!user, userEmail: user?.email })));
+
   return (
     <>
       <Header />
