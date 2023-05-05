@@ -1,9 +1,9 @@
 import { logOut, signIn, signUp } from '@/auth/firebaseAuth';
+import LanguageSwitch from '@/components/LanguageSwitch';
 import { selectAuth } from '@/redux/auth';
 import { useAppSelector } from '@/redux/hooks';
 import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
-import Link from 'next/link';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -37,6 +37,7 @@ export default function Home() {
             <button onClick={signInTest}>{t('sign-in')}</button>
           )}
           <div>{userEmail}</div>
+          <LanguageSwitch />
         </div>
       </main>
     </>
