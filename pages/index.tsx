@@ -1,9 +1,7 @@
 import { logOut, signIn, signUp } from '@/auth/firebaseAuth';
 import { selectAuth } from '@/redux/auth';
 import { useAppSelector } from '@/redux/hooks';
-import { GetServerSideProps } from 'next';
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -55,11 +53,4 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
-  const translations = await serverSideTranslations(locale || 'en');
-  return {
-    props: {
-      ...translations,
-    },
-  };
-};
+export { default as getServerSideProps } from '../lib/defaultServerProps';

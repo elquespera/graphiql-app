@@ -25,3 +25,5 @@ export default function EditorPage() {
     </>
   );
 }
+
+export { default as getServerSideProps } from '../lib/defaultServerProps';

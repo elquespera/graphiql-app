@@ -30,3 +30,5 @@ export default function SignUpPage() {
     </>
   );
 }
+
+export { default as getServerSideProps } from '../lib/defaultServerProps';

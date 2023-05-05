@@ -30,3 +30,5 @@ export default function SignInPage() {
     </>
   );
 }
+
+export { default as getServerSideProps } from '../lib/defaultServerProps';
