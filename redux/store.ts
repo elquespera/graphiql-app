@@ -6,6 +6,7 @@ import { graphQlResponseSlice } from './graphQlResponse';
 import { settingsReducer, settingsSlice } from './settings';
 
 import { createWrapper } from 'next-redux-wrapper';
+import { COOKIE_MAX_AGE, LANGUAGE_COOKIE } from '@/constants/constants';
 
 const makeStore = wrapMakeStore(() =>
   configureStore({
@@ -22,8 +23,8 @@ const makeStore = wrapMakeStore(() =>
             subtrees: [
               {
                 subtree: `${settingsSlice.name}.language`,
-                cookieName: 'APP_LANGUAGE',
-                maxAge: 7 * 24 * 3600,
+                cookieName: LANGUAGE_COOKIE,
+                maxAge: COOKIE_MAX_AGE,
                 sameSite: true,
                 serializationFunction: String,
                 deserializationFunction: String,
