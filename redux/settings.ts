@@ -18,7 +18,9 @@ export const settingsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase<typeof HYDRATE, PayloadAction<RootState, typeof HYDRATE>>(
       HYDRATE,
-      (state, { payload }) => ({ ...state, ...payload.settings })
+      (state, { payload }) => {
+        state.language = payload.settings.language;
+      }
     );
   },
 });
