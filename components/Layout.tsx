@@ -18,11 +18,11 @@ export default function Layout({ children }: PropsWithChildren) {
   useEffect(() => {
     if (isAuth) {
       if (AUTH_PATHS.includes(router.asPath)) {
-        router.replace('/');
+        router.replace('/editor');
       }
     } else {
       if (router.asPath === '/editor') {
-        router.replace('/sign-in');
+        router.replace('/');
       }
     }
   }, [router, isAuth]);

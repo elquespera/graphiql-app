@@ -32,7 +32,6 @@ export default function AuthForm({ type }: AuthFormProps) {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<IFormData>({
     criteriaMode: 'all',
