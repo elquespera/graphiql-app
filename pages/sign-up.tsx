@@ -1,4 +1,6 @@
 import AuthForm from '@/components/AuthForm';
+import LanguageSwitch from '@/components/LanguageSwitch';
+import Logo from '@/components/Logo';
 import useTranslation from '@/hooks/useTranslation';
 import { selectAuth } from '@/redux/auth';
 import { useAppSelector } from '@/redux/hooks';
@@ -16,7 +18,11 @@ export default function SignUpPage() {
       <Head>
         <title>{`${t('app-name')} - ${t('sign-up')}`}</title>
       </Head>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex items-center gap-4 p-4 sm:p-8 sm:gap-8">
+        <Logo />
+        <LanguageSwitch />
+      </div>
+      <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-white text-2xl font-bold leading-9 tracking-tight">
             {t('sign-up')}

@@ -126,7 +126,7 @@ export default function AuthForm({ type }: AuthFormProps) {
         )}
       </div>
 
-      <Button type="submit" disabled={isLoadling}>
+      <Button type="submit" disabled={isLoadling} className="w-full">
         {isLoadling && <Spinner />}
         {t(type === 'sign-up' ? 'sign-up' : 'sign-in')}
       </Button>

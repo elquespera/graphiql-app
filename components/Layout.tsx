@@ -7,13 +7,13 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { selectAuth, setIsAuth } from '@/redux/auth';
 import { useRouter } from 'next/router';
 import { AUTH_PATHS } from '@/constants/constants';
+import clsx from 'clsx';
 
 export default function Layout({ children }: PropsWithChildren) {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { isAuth } = useAppSelector(selectAuth);
-
-  onAuthChanged((user) => dispatch(setIsAuth({ isAuth: !!user, userEmail: user?.email })));
+  const isPrivate = router.asPath === '/editor';
 
   useEffect(() => {
     if (isAuth) {
@@ -21,18 +21,20 @@ export default function Layout({ children }: PropsWithChildren) {
         router.replace('/editor');
       }
     } else {
-      if (router.asPath === '/editor') {
+      if (isPrivate) {
         router.replace('/');
       }
     }
-  }, [router, isAuth]);
+  }, [router, isAuth, isPrivate]);
+
+  useEffect(() => {
+    onAuthChanged((user) => dispatch(setIsAuth({ isAuth: !!user, userEmail: user?.email })));
+  }, [dispatch]);
 
   return (
     <>
-      <Header />
-      <main className="w-screen my-12 bg-slate-900 text-slate-300 h-[calc(100vh-6rem)]">
-        {children}
-      </main>
+      {isPrivate && <Header />}
+      <main className={clsx('w-screen flex-grow pb-footer')}>{children}</main>
       <Footer />
     </>
   );

@@ -3,9 +3,14 @@
   "title-welcome": "Welcome",
   "title-editor": "Query Editor",
 
+  "or": "or",
+
+  "go-to-main": "Go to the editor",
+
   "sign-in": "Sign in",
   "sign-up": "Sign up",
   "log-out": "Log out",
+
   "email-address": "Email address",
   "password": "Password",
   "email-is-required": "Email is required",

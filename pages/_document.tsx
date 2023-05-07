@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <link rel="icon" href="/favicon.svg" />
       </Head>
-      <body className="min-h-screen bg-slate-200 flex flex-col items-center justify-center">
+      <body>
         <Main />
         <NextScript />
       </body>

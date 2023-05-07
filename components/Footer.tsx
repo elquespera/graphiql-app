@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="fixed left-0 right-0 bottom-0 h-12 w-full px-12 flex flex-row justify-between items-center bg-slate-800 text-slate-100">
+    <footer className="fixed left-0 right-0 bottom-0 w-full h-footer px-12 flex flex-row justify-between items-center bg-slate-800 text-slate-100">
       <a href="https://github.com/elquespera/graphiql-app" target="_blank" rel="noreferrer">
         {gitHubIcon()}
       </a>
