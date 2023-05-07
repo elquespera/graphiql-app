@@ -19,7 +19,7 @@ export default function EditorPage() {
         <title>{`${t('app-name')} - ${t('title-editor')}`}</title>
       </Head>
 
-      <main className="w-screen my-12 bg-slate-900 text-slate-300 ">
+      <section className="my-12 bg-slate-900 text-slate-300 ">
         <div className="flex flex-col sm:flex-row gap-2 h-[calc(100vh-6rem)] justify-between">
           <Documentation />
           <section className="flex-[2] flex flex-col justify-between">
@@ -29,7 +29,7 @@ export default function EditorPage() {
           </section>
           <Response />
         </div>
-      </main>
+      </section>
     </>
   );
 }

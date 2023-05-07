@@ -21,7 +21,7 @@ export default function Home() {
       <Head>
         <title>{`${t('app-name')} - ${t('title-welcome')}`}</title>
       </Head>
-      <section className="flex flex-col gap-8 p-4 sm:p-8">
+      <section className="flex flex-col gap-8 p-4 sm:p-8 mb-footer">
         <div className="flex gap-4 sm:gap-6 items-center">
           <LanguageSwitch className="mr-auto" />
           {isAuth ? (

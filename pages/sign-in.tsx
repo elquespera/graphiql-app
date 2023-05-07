@@ -22,7 +22,7 @@ export default function SignInPage() {
         <Logo />
         <LanguageSwitch />
       </div>
-      <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8 mb-footer">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-white text-2xl font-bold leading-9 tracking-tight">
             {t('sign-in')}

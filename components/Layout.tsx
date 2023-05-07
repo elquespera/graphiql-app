@@ -1,13 +1,12 @@
 import { PropsWithChildren, useEffect } from 'react';
 
-import Header from './Header';
-import Footer from './Footer';
 import { onAuthChanged } from '@/auth/firebaseAuth';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { selectAuth, setIsAuth } from '@/redux/auth';
-import { useRouter } from 'next/router';
 import { AUTH_PATHS } from '@/constants/constants';
-import clsx from 'clsx';
+import { selectAuth, setIsAuth } from '@/redux/auth';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useRouter } from 'next/router';
+import Footer from './Footer';
+import Header from './Header';
 
 export default function Layout({ children }: PropsWithChildren) {
   const dispatch = useAppDispatch();
@@ -34,7 +33,7 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <>
       {isPrivate && <Header />}
-      <main className={clsx('w-screen flex-grow pb-footer')}>{children}</main>
+      <main>{children}</main>
       <Footer />
     </>
   );
