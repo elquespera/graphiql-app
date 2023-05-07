@@ -3,6 +3,7 @@ import { selectAuth } from '@/redux/auth';
 import { logOut } from '@/auth/firebaseAuth';
 import NavLink from './NavLink';
 import { useRouter } from 'next/router';
+import LanguageSwitch from './LanguageSwitch';
 
 export default function Header() {
   const { isAuth } = useAppSelector(selectAuth);
@@ -20,6 +21,7 @@ export default function Header() {
         <NavLink label="Home" pathName="/" />
         <NavLink label="IDE" pathName="/editor" />
       </div>
+      <LanguageSwitch />
       {isAuth && (
         <button onClick={logOutUser} className="basis-[7.6rem]">
           Log out

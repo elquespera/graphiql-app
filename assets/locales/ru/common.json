@@ -1,5 +1,13 @@
 {
   "sign-in": "Войти",
   "sign-up": "Регистрация",
-  "log-out": "Выйти"
-}
+  "log-out": "Выйти",
+  "email-address": "Адрес электронной почты",
+  "password": "Пароль",
+  "email-is-required": "Требуется адрес электронной почты",
+  "email-is-invalid": "Неверный адрес электронной почты",
+  "password-8-characters": "Минимум 8 символов",
+  "password-1-letter": "Минимум 1 буква",
+  "password-1-digit": "Минимум 1 цифра",
+  "password-1-special-character": "Минимум 1 специальный символ (!%#$ и т.п.)"
+  }

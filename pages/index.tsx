@@ -1,5 +1,4 @@
 import { logOut, signIn, signUp } from '@/auth/firebaseAuth';
-import LanguageSwitch from '@/components/LanguageSwitch';
 import useTranslation from '@/hooks/useTranslation';
 import { selectAuth } from '@/redux/auth';
 import { useAppSelector } from '@/redux/hooks';
@@ -37,7 +36,6 @@ export default function Home() {
             <button onClick={signInTest}>{t('sign-in')}</button>
           )}
           <div>{userEmail}</div>
-          <LanguageSwitch />
         </div>
       </main>
     </>
