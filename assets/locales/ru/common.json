@@ -9,5 +9,7 @@
   "password-8-characters": "Минимум 8 символов",
   "password-1-letter": "Минимум 1 буква",
   "password-1-digit": "Минимум 1 цифра",
-  "password-1-special-character": "Минимум 1 специальный символ (!%#$ и т.п.)"
-  }
+  "password-1-special-character": "Минимум 1 специальный символ (!%#$ и т.п.)",
+  "already-have-account": "Уже есть аккаунт?",
+  "do-not-have-account": "Еще нет аккаунта?"
+}
