@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 import { onAuthChanged } from '@/auth/firebaseAuth';
 import { AUTH_PATHS } from '@/constants/constants';
@@ -13,8 +13,11 @@ export default function Layout({ children }: PropsWithChildren) {
   const router = useRouter();
   const { isAuth } = useAppSelector(selectAuth);
   const isPrivate = router.asPath === '/editor';
+  const [authTouched, setAuthTouched] = useState(false);
 
   useEffect(() => {
+    if (!authTouched) return;
+
     if (isAuth) {
       if (AUTH_PATHS.includes(router.asPath)) {
         router.replace('/editor');
@@ -24,10 +27,13 @@ export default function Layout({ children }: PropsWithChildren) {
         router.replace('/');
       }
     }
-  }, [router, isAuth, isPrivate]);
+  }, [router, isAuth, isPrivate, authTouched]);
 
   useEffect(() => {
-    onAuthChanged((user) => dispatch(setIsAuth({ isAuth: !!user, userEmail: user?.email })));
+    onAuthChanged((user) => {
+      setAuthTouched(true);
+      dispatch(setIsAuth({ isAuth: !!user, userEmail: user?.email }));
+    });
   }, [dispatch]);
 
   return (
