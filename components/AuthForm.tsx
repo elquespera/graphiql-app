@@ -1,4 +1,5 @@
 'use client';
+import { signUp, signIn } from '@/auth/firebaseAuth';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
 import { useEffect } from 'react';
@@ -28,7 +29,17 @@ export default function AuthForm({ type }: AuthFormProps) {
     }
   }, [reset, isSubmitSuccessful]);
 
-  const onSubmit: SubmitHandler<IFormData> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormData> = async (data) => {
+    const { email, password } = data;
+
+    if (type === 'sign-up') {
+      const res = await signUp(email, password);
+      console.log(res);
+    } else {
+      const res = await signIn(email, password);
+      console.log(res);
+    }
+  };
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
