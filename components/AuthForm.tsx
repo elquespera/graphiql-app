@@ -8,6 +8,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Spinner from './Spinner';
 import { AUTH_INVALID_PASSWORD, AUTH_USER_NOT_FOUND } from '@/constants/constants';
 import { TranslationKey } from '@/assets/locales/translations';
+import Button from './Button';
 
 interface AuthFormProps {
   type: 'sign-up' | 'sign-in';
@@ -125,19 +126,10 @@ export default function AuthForm({ type }: AuthFormProps) {
         )}
       </div>
 
-      <button
-        type="submit"
-        disabled={isLoadling}
-        className={`flex justify-center items-center gap-2 rounded-md
-             w-full px-3 py-1.5 text-sm font-semibold leading-6
-             bg-indigo-600  text-white shadow-sm             
-             hover:bg-indigo-500 disabled:bg-slate-600 
-            focus-visible:outline focus-visible:outline-2 
-            focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
-      >
+      <Button type="submit" disabled={isLoadling}>
         {isLoadling && <Spinner />}
         {t(type === 'sign-up' ? 'sign-up' : 'sign-in')}
-      </button>
+      </Button>
       {error && <ValidationMessage isError message={t(error)} />}
     </form>
   );
