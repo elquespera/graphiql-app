@@ -1,10 +1,15 @@
 import AuthForm from '@/components/AuthForm';
 import useTranslation from '@/hooks/useTranslation';
+import { selectAuth } from '@/redux/auth';
+import { useAppSelector } from '@/redux/hooks';
 import Head from 'next/head';
 import Link from 'next/link';
 
 export default function SignInPage() {
   const t = useTranslation();
+  const { isAuth } = useAppSelector(selectAuth);
+
+  if (isAuth) return null;
 
   return (
     <>

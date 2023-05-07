@@ -1,10 +1,13 @@
 'use client';
-import { signUp, signIn } from '@/auth/firebaseAuth';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
-import { useEffect } from 'react';
+import { signIn, signUp } from '@/auth/firebaseAuth';
 import useTranslation from '@/hooks/useTranslation';
+import { CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import Spinner from './Spinner';
+import { AUTH_INVALID_PASSWORD, AUTH_USER_NOT_FOUND } from '@/constants/constants';
+import { TranslationKey } from '@/assets/locales/translations';
 
 interface AuthFormProps {
   type: 'sign-up' | 'sign-in';
@@ -23,28 +26,39 @@ const SPECIAL_CHAR_PATTERN = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 export default function AuthForm({ type }: AuthFormProps) {
   const t = useTranslation();
 
+  const [isLoadling, setIsLoading] = useState(false);
+  const [error, setError] = useState<TranslationKey>();
+
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm<IFormData>({
     criteriaMode: 'all',
   });
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset();
-    }
-  }, [reset, isSubmitSuccessful]);
-
   const onSubmit: SubmitHandler<IFormData> = async (data) => {
     const { email, password } = data;
 
-    if (type === 'sign-up') {
-      const res = await signUp(email, password);
-    } else {
-      const res = await signIn(email, password);
+    const signInOrUp = type === 'sign-up' ? signUp : signIn;
+
+    try {
+      setIsLoading(true);
+      const { error } = await signInOrUp(email, password);
+      if (error) {
+        setError(
+          error.code === AUTH_USER_NOT_FOUND || error.code === AUTH_INVALID_PASSWORD
+            ? 'login-invalid-credentials'
+            : 'login-error'
+        );
+      } else {
+        setError(undefined);
+      }
+    } catch {
+      setError('login-error');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -112,14 +126,20 @@ export default function AuthForm({ type }: AuthFormProps) {
         )}
       </div>
 
-      <div>
-        <button
-          type="submit"
-          className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          {t(type === 'sign-up' ? 'sign-up' : 'sign-in')}
-        </button>
-      </div>
+      <button
+        type="submit"
+        disabled={isLoadling}
+        className={`flex justify-center items-center gap-2 rounded-md
+             w-full px-3 py-1.5 text-sm font-semibold leading-6
+             bg-indigo-600  text-white shadow-sm             
+             hover:bg-indigo-500 disabled:bg-slate-600 
+            focus-visible:outline focus-visible:outline-2 
+            focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+      >
+        {isLoadling && <Spinner />}
+        {t(type === 'sign-up' ? 'sign-up' : 'sign-in')}
+      </button>
+      {error && <ValidationMessage isError message={t(error)} />}
     </form>
   );
 }
@@ -133,9 +153,9 @@ function ValidationMessage({ isError, message }: ValidationMessageProps) {
   return (
     <li className="flex items-center gap-x-1.5">
       {isError ? (
-        <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+        <ExclamationCircleIcon className="h-5 w-5 flex-shrink-0 text-red-500" />
       ) : (
-        <CheckCircleIcon className="h-5 w-5 text-green-500" />
+        <CheckCircleIcon className="h-5 w-5 flex-shrink-0 text-green-500" />
       )}
 
       <span className={clsx('text-sm', isError ? 'text-red-500' : 'text-green-500')}>
