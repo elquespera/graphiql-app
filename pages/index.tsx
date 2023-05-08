@@ -70,7 +70,7 @@ export default function Home() {
         </div>
 
         <h2 className="text-3xl">Our team</h2>
-        <div className="mt-8 flex justify-center gap-24">
+        <div className="mt-8 flex flex-row flex-wrap justify-center gap-5 sm:gap-12 md:gap-24">
           <div className="flex flex-col items-center">
             <Image src={pavelImage} alt="personal" height={100} width={100} />
             <p className="mt-4 mb-2 text-xl">Pavel</p>
