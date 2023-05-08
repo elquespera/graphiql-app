@@ -4,6 +4,7 @@ import { useAppSelector } from '@/redux/hooks';
 import useTranslation from '@/hooks/useTranslation';
 import Documentation from '@/components/Documentation';
 import Operations from '@/components/Operations';
+import QueryHeaders from '@/components/QueryHeaders';
 import Response from '@/components/Response';
 import Sidebar from '@/components/Sidebar/Sidebar';
 

@@ -30,13 +30,13 @@ export const graphQlQuerySlice = createSlice({
       state.headers[key] = value;
     },
 
-    removeQueryHeader: (state, { payload: key }: PayloadAction<string>) => {
+    deleteQueryHeader: (state, { payload: key }: PayloadAction<string>) => {
       delete state.headers[key];
     },
   },
 });
 
-export const { setQuery, setQueryBody, setQueryVariables, addQueryHeader, removeQueryHeader } =
+export const { setQuery, setQueryBody, setQueryVariables, addQueryHeader, deleteQueryHeader } =
   graphQlQuerySlice.actions;
 
 export const selectGraphQlQuery = (state: RootState) => state.graphQlQuery;
