@@ -1,6 +1,9 @@
 import { selectGraphQlQuery } from '@/redux/graphQlQuery';
 import { useGraphQLMutation } from '@/redux/graphQlResponse';
 import { useAppSelector } from '@/redux/hooks';
+import { ClipboardIcon, PlayCircleIcon } from '@heroicons/react/24/solid';
+import FlatButton from './FlatButton';
+import Spinner from './Spinner';
 
 export default function Response() {
   const query = useAppSelector(selectGraphQlQuery);
@@ -16,17 +19,24 @@ export default function Response() {
     <div className="flex-1 p-4 md:pb-footer flex flex-col">
       <h1>Response</h1>
       <div className="flex flex-col">
-        <button onClick={handleSubmit} className="bg-slate-100 text-slate-800 p-2">
-          Submit
-        </button>
+        <div className="flex gap-2">
+          <FlatButton round onClick={handleSubmit}>
+            <PlayCircleIcon className="w-5 h-5" />
+          </FlatButton>
+          <FlatButton round>
+            <ClipboardIcon className="w-5 h-5" />
+          </FlatButton>
+        </div>
         <pre className="mt-2 break-all whitespace-pre-wrap overflow-y-auto h-[calc(100vh-12rem)]">
-          {isLoading
-            ? 'Loading...'
-            : isError
-            ? errorMsg
-            : data
-            ? JSON.stringify(data, null, ' ')
-            : 'Click Submit to fetch data'}
+          {isLoading ? (
+            <Spinner />
+          ) : isError ? (
+            errorMsg
+          ) : data ? (
+            JSON.stringify(data, null, ' ')
+          ) : (
+            'Click Submit to fetch data'
+          )}
         </pre>
       </div>
     </div>

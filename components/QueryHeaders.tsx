@@ -1,14 +1,14 @@
 import { addQueryHeader, deleteQueryHeader, selectGraphQlQuery } from '@/redux/graphQlQuery';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import Button from './Button';
-import { TrashIcon } from '@heroicons/react/24/solid';
+import { PlusCircleIcon, TrashIcon } from '@heroicons/react/24/solid';
+import FlatButton from './FlatButton';
 
 export default function QueryHeaders() {
   const dispatch = useAppDispatch();
   const { headers } = useAppSelector(selectGraphQlQuery);
 
   const handleAddHeader = () => {
-    dispatch(addQueryHeader(['new header', 'with some random value']));
+    dispatch(addQueryHeader(['new-header', 'with some random value']));
   };
 
   const handleDeleteHeader = (key: string) => {
@@ -23,14 +23,20 @@ export default function QueryHeaders() {
           {Object.entries(headers).map(([key, value]) => (
             <li key={key} className="relative flex">
               {key}: {value}
-              <Button className="absolute right-0" onClick={() => handleDeleteHeader(key)}>
+              <FlatButton
+                round
+                className="absolute right-0"
+                onClick={() => handleDeleteHeader(key)}
+              >
                 <TrashIcon className="w-5 h-5" />
-              </Button>
+              </FlatButton>
             </li>
           ))}
         </ul>
-        <div className="mt-auto">
-          <Button onClick={handleAddHeader}>Add header</Button>
+        <div className="mt-auto flex">
+          <FlatButton onClick={handleAddHeader}>
+            <PlusCircleIcon className="w-5 h-5" /> Add header
+          </FlatButton>
         </div>
       </div>
     </div>
