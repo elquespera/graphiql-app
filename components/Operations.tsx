@@ -13,9 +13,9 @@ export default function Operations() {
   return (
     <div className="bg-slate-950 flex-[2] p-4 flex flex-col">
       <h2>Operations</h2>
-      <div className="flex-1 flex flex-col overflow-y-scroll mt-2">
+      <div className="flex-1 flex flex-col mt-2">
         <textarea
-          className="flex-1 bg-inherit text-inherit"
+          className="flex-1 bg-inherit text-inherit resize-none"
           value={query}
           onChange={handleChange}
         />
