@@ -6,6 +6,10 @@ import useTranslation from '@/hooks/useTranslation';
 import { selectAuth } from '@/redux/auth';
 import { useAppSelector } from '@/redux/hooks';
 import Head from 'next/head';
+import Image from 'next/image';
+import pavelImage from '@/assets/images/pavel.png';
+import sadulloImage from '@/assets/images/sadullo.png';
+import tomasImage from '@/assets/images/tomas.png';
 
 export default function Home() {
   const t = useTranslation();
@@ -47,18 +51,15 @@ export default function Home() {
 
         <h2 className="text-3xl">About</h2>
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident laboriosam unde
-          voluptatem dolores deserunt animi excepturi ipsam iusto commodi aperiam.
+          GraphiQL is a web-based development tool for testing and exploring GraphQL APIs. It
+          provides an interactive interface where developers can write and execute GraphQL queries,
+          view the response data, and explore the API documentation. GraphiQL allows users to set
+          query variables and headers, making it easy to test various scenarios and edge cases. It
+          also offers features like auto-completion and syntax highlighting, which make writing
+          GraphQL queries more efficient. Overall, GraphiQL is a powerful and user-friendly tool for
+          testing and developing GravphQL APIs.
         </p>
 
-        <h2 className="text-3xl">Our team</h2>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi, natus quidem quae placeat
-          obcaecati vero nostrum voluptatum fugit eos voluptatibus consectetur molestias ad
-          doloremque ipsum illum dignissimos. Officiis officia ex laudantium repudiandae, eius
-          repellendus cumque, nesciunt quia quod voluptas porro fugit suscipit ipsam vero et tenetur
-          aspernatur esse? Magnam, harum.
-        </p>
         <div>
           {isAuth ? (
             <Button onClick={logOut}>Test log out</Button>
@@ -66,6 +67,52 @@ export default function Home() {
             <Button onClick={signInTest}>Test sign in</Button>
           )}
           {userEmail}
+        </div>
+
+        <h2 className="text-3xl">Our team</h2>
+        <div className="mt-8 flex justify-center gap-24">
+          <div className="flex flex-col items-center">
+            <Image src={pavelImage} alt="personal" height={100} width={100} />
+            <p className="mt-4 mb-2 text-xl">Pavel</p>
+            <p>Taem Leader</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <Image src={sadulloImage} alt="personal" height={100} width={100} />
+            <p className="mt-4 mb-2 text-xl">Sadullo</p>
+            <p>FE Developer</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <Image src={tomasImage} alt="personal" height={100} width={100} />
+            <p className="mt-4 mb-2 text-xl">Tomas</p>
+            <p>FE Developer</p>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <h2 className="text-center text-3xl">React Course</h2>
+          <p className="text-center text-green-400 mb-6">Free | Online | in English</p>
+          <h3 className="text-xl mb-4">Target Audience</h3>
+          <p>
+            Students of the RS School from the 2022Q3, which has passed RS School Stage #2 as well
+            as new students with practical experience and knowledge of:
+          </p>
+          <ul className="list-outside list-disc ml-6">
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+            <li>
+              Git, GitHub (clone, add, commit, push, pull, merge, rebase, working with Pull Request)
+            </li>
+            <li>NPM, Webpack</li>
+            <li>CSS3 / HTML5</li>
+            <li>Chrome DevTools, Figma</li>
+            <li>Understanding of the REST</li>
+          </ul>
+          <a
+            href="https://wearecommunity.io/events/rs-react-2023q1"
+            className="px-5 py-2 bg-pink-600 inline-block my-6 mx-auto hover:bg-pink-500 text-white"
+          >
+            Enroll
+          </a>
         </div>
       </section>
     </>
