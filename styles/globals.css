@@ -2,21 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  html {
+    @apply bg-slate-900 text-slate-300;
+  }
+
+  html,
+  body {
+    @apply h-full;
+  }
+
+  #__next {
+    @apply h-full flex flex-col;
+  }
+}
+
 ::-webkit-scrollbar {
-	width: 10px;
+  width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background: #858585;
+  background: #858585;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #4e4e4e;
+  background: #4e4e4e;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #242424;
+  background: #242424;
 }

@@ -1,35 +1,27 @@
-import { useAppSelector } from '@/redux/hooks';
-import { selectAuth } from '@/redux/auth';
 import { logOut } from '@/auth/firebaseAuth';
+import useTranslation from '@/hooks/useTranslation';
+import { selectAuth } from '@/redux/auth';
+import { useAppSelector } from '@/redux/hooks';
+import { UserCircleIcon } from '@heroicons/react/24/solid';
+import LanguageSwitch from './LanguageSwitch';
+import Logo from './Logo';
 import NavLink from './NavLink';
-import { useRouter } from 'next/router';
 
 export default function Header() {
-  const { isAuth } = useAppSelector(selectAuth);
-  const router = useRouter();
-
-  const logOutUser = async () => {
-    await logOut();
-    router.replace('/');
-  };
+  const t = useTranslation();
+  const { isAuth, userEmail } = useAppSelector(selectAuth);
 
   return (
-    <header className="fixed left-0 right-0 top-0 h-12 w-full px-8 flex gap-2 justify-between items-center bg-slate-800 text-slate-100">
-      <h1>GraphiQL</h1>
-      <div className="flex gap-8">
-        <NavLink label="Home" pathName="/" />
-        <NavLink label="IDE" pathName="/editor" />
-      </div>
-      {isAuth && (
-        <button onClick={logOutUser} className="basis-[7.6rem]">
-          Log out
-        </button>
-      )}
-      {!isAuth && (
-        <div className="flex gap-4">
-          <NavLink label="Sign-in" pathName="/sign-in" />
-          <NavLink label="Sign-up" pathName="/sign-up" />
+    <header className="fixed left-0 right-0 top-0 w-full h-header px-4 flex gap-4 items-center bg-slate-800 text-slate-100">
+      <Logo />
+      <LanguageSwitch className="ml-auto" />
+      {isAuth ? (
+        <div className="flex gap-2">
+          <UserCircleIcon className="w-6 h-6" /> {userEmail}
+          <button onClick={logOut}>{t('log-out')}</button>
         </div>
+      ) : (
+        <NavLink href="/sign-up">{t('sign-up')}</NavLink>
       )}
     </header>
   );

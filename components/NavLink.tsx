@@ -1,19 +1,22 @@
-import Link from 'next/link';
+import clsx from 'clsx';
+import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
 
-type NavLinkProps = {
-  pathName: string;
-  label: string;
-};
+interface NavLinkProps extends LinkProps {
+  children?: React.ReactNode;
+  className?: string;
+}
 
-export default function NavLink({ pathName, label }: NavLinkProps) {
-  const router = useRouter();
+export default function NavLink({ href, children, className, ...props }: NavLinkProps) {
+  const { pathname } = useRouter();
   return (
     <Link
-      href={pathName}
-      className={router.pathname == pathName ? 'underline underline-offset-8' : ''}
+      {...props}
+      href={href}
+      className={clsx(className, pathname == href && 'underline underline-offset-8')}
     >
-      {label}
+      {children}
     </Link>
   );
 }
