@@ -11,10 +11,11 @@ export const graphQlResponseSlice = createApi({
       query: (payload: IGraphQLQuery) => ({
         url: '/',
         method: 'POST',
-        body: payload,
-        headers: {
-          'Content-type': 'application/json',
+        body: {
+          query: payload.query,
+          variables: payload.variables,
         },
+        headers: { ...payload.headers, 'Content-type': 'application/json' },
       }),
     }),
   }),
