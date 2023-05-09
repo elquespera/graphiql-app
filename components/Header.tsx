@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { UserCircleIcon, Bars3Icon } from '@heroicons/react/24/solid';
+import { UserCircleIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
 
 import { useAppSelector } from '@/redux/hooks';
 import { selectAuth } from '@/redux/auth';
@@ -40,7 +40,12 @@ export default function Header() {
     >
       <Logo />
       <nav>
-        <Bars3Icon className="w-6 h-6 md:hidden" onClick={handleHamburger} />
+        {!isHamOpen && (
+          <Bars3Icon className="w-6 h-6 md:hidden cursor-pointer" onClick={handleHamburger} />
+        )}
+        {isHamOpen && (
+          <XMarkIcon className="w-6 h-6 md:hidden cursor-pointer" onClick={handleHamburger} />
+        )}
         <ul
           className={`${
             isHamOpen ? '' : 'translate-x-full'
