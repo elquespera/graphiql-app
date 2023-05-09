@@ -13,7 +13,7 @@ export default function Response() {
   };
 
   return (
-    <div className="flex-1 p-4 flex flex-col">
+    <div className="flex-1 p-4 md:pb-footer flex flex-col">
       <h1>Response</h1>
       <div className="flex flex-col">
         <button onClick={handleSubmit} className="bg-slate-100 text-slate-800 p-2">

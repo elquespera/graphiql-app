@@ -36,7 +36,7 @@ export default function Header() {
     <header
       className={`${
         scrolled && !isHamOpen ? 'h-10' : 'h-header'
-      } sticky left-0 right-0 top-0 w-full transition-all duration-200 px-8 flex justify-between items-center bg-slate-800 text-slate-100`}
+      } sticky left-0 z-10 right-0 top-0 w-full transition-all duration-200 px-8 flex justify-between items-center bg-slate-800 text-slate-100`}
     >
       <Logo />
       <nav>
