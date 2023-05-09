@@ -4,12 +4,12 @@
 
 @layer components {
   html {
-    @apply bg-slate-900 text-slate-300;
+    @apply bg-slate-900 text-slate-300 scroll-smooth;
   }
 
   html,
   body {
-    @apply h-full;
+    @apply h-auto;
   }
 
   #__next {

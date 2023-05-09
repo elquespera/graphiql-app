@@ -12,9 +12,9 @@ export default function Variables() {
   return (
     <div className="bg-slate-950 flex-1 p-4 flex flex-col">
       <h1>Variables</h1>
-      <div className="flex-1 flex flex-col overflow-y-scroll mt-2">
+      <div className="flex-1 flex flex-col mt-2">
         <textarea
-          className="flex-1 bg-inherit text-inherit"
+          className="flex-1 bg-inherit text-inherit resize-none"
           value={variables}
           onChange={handleChange}
         />

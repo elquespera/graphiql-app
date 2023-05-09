@@ -31,7 +31,7 @@ export default function LanguageSwitch({ className, ...props }: LanguageSwitchPr
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 min-w-[8rem] overflow-auto rounded-md bg-slate-950  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute mt-1 md:right-0 max-h-60 min-w-[8rem] overflow-auto rounded-md bg-slate-950  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {Object.entries(LANGUAGE_NAMES).map(([lang, name]) => (
                 <Listbox.Option
                   key={lang}
