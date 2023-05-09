@@ -25,7 +25,7 @@ export default function Home() {
       <Head>
         <title>{`${t('app-name')} - ${t('title-welcome')}`}</title>
       </Head>
-      <section className="flex flex-col gap-8 p-4 sm:p-8 mb-footer">
+      <section className="flex flex-col gap-8 p-4 sm:p-8 mb-footer max-w-7xl mx-auto">
         <div className="flex gap-4 sm:gap-6 items-center">
           <LanguageSwitch className="mr-auto" />
           {isAuth ? (
@@ -96,7 +96,7 @@ export default function Home() {
             Students of the RS School from the 2022Q3, which has passed RS School Stage #2 as well
             as new students with practical experience and knowledge of:
           </p>
-          <ul className="list-outside list-disc ml-6">
+          <ul className="list-outside list-disc ml-6 mb-4">
             <li>JavaScript</li>
             <li>TypeScript</li>
             <li>
@@ -109,7 +109,9 @@ export default function Home() {
           </ul>
           <a
             href="https://wearecommunity.io/events/rs-react-2023q1"
-            className="px-5 py-2 bg-pink-600 inline-block my-6 mx-auto hover:bg-pink-500 text-white"
+            target="_blank"
+            className="rounded-md px-3 py-1.5 text-sm font-semibold leading-6 bg-indigo-600  text-white shadow-sm hover:bg-indigo-500"
+            rel="noreferrer"
           >
             Enroll
           </a>
