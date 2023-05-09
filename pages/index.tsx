@@ -96,7 +96,7 @@ export default function Home() {
             Students of the RS School from the 2022Q3, which has passed RS School Stage #2 as well
             as new students with practical experience and knowledge of:
           </p>
-          <ul className="list-outside list-disc ml-6 mb-4">
+          <ul className="list-outside list-disc ml-6 mb-5">
             <li>JavaScript</li>
             <li>TypeScript</li>
             <li>
