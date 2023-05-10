@@ -7,12 +7,16 @@ export interface ISettings {
   language: AppLanguage;
 }
 
-export type QueryHeader = [string, string];
+export interface QueryHeader {
+  id: string;
+  key: string;
+  value: string;
+}
 
 export interface IGraphQLQuery {
   query: string;
   variables?: string;
-  headers: Record<string, string>;
+  headers: QueryHeader[];
 }
 
 export const AppLanguages = ['en', 'ru'] as const;

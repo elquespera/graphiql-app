@@ -1,9 +1,11 @@
-import { Transition } from '@headlessui/react';
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
-import { MouseEvent, useState } from 'react';
-import QueryVariables from './QueryVariables';
-import QueryHeaders from './QueryHeaders';
 import useTranslation from '@/hooks/useTranslation';
+import { Transition } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
+import clsx from 'clsx';
+import { MouseEvent, useState } from 'react';
+import FlatButton from './FlatButton';
+import QueryHeaders from './QueryHeaders';
+import QueryVariables from './QueryVariables';
 
 export default function QueryOptions() {
   const t = useTranslation();
@@ -64,20 +66,15 @@ export default function QueryOptions() {
             {t('headers')}
           </button>
         </div>
-        <button
-          onClick={handleShowSection}
-          aria-label="caret"
-          className={`${showSection ? 'text-gray-200' : ''} hover:bg-gray-800 p-2 rounded-lg`}
-        >
-          {!showSection && <ChevronDownIcon className="w-6" />}
-          {showSection && <ChevronUpIcon className="w-6" />}
-        </button>
+        <FlatButton round onClick={handleShowSection} aria-label="caret">
+          <ChevronDownIcon className={clsx('w-6', !showSection && 'rotate-180')} />
+        </FlatButton>
       </h2>
       <Transition
         show={showSection}
         enter="transition-all ease duration-200"
         enterFrom="h-0"
-        enterTo="h-40"
+        enterTo="h-[30vh]"
         leave="transition-all ease duration-200"
         leaveFrom="h-40"
         leaveTo="h-0"

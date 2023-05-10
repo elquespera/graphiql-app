@@ -6,7 +6,7 @@ import { QUERY_EXAMPLE, VARIABLES_EXAMPLE } from '@/constants/queryExample';
 const initialState: IGraphQLQuery = {
   query: QUERY_EXAMPLE,
   variables: VARIABLES_EXAMPLE,
-  headers: { something: 'something' },
+  headers: [],
 };
 
 export const graphQlQuerySlice = createSlice({
@@ -26,18 +26,42 @@ export const graphQlQuerySlice = createSlice({
       state.variables = payload;
     },
 
-    addQueryHeader: (state, { payload: [key, value] }: PayloadAction<QueryHeader>) => {
-      state.headers[key] = value;
+    setQueryHeaders: (state, { payload }: PayloadAction<QueryHeader[]>) => {
+      state.headers = payload;
     },
 
-    deleteQueryHeader: (state, { payload: key }: PayloadAction<string>) => {
-      delete state.headers[key];
+    addQueryHeader: (state, { payload: [key, value] }: PayloadAction<[string, string]>) => {
+      state.headers.push({
+        id: crypto.randomUUID(),
+        key,
+        value,
+      });
+    },
+
+    deleteQueryHeader: (state, { payload: id }: PayloadAction<string>) => {
+      const index = state.headers.findIndex((header) => header.id === id);
+      if (index >= 0) state.headers.splice(index, 1);
+    },
+
+    updateQueryHeader: (state, { payload: header }: PayloadAction<QueryHeader>) => {
+      const index = state.headers.findIndex(({ id }) => id === header.id);
+      if (index >= 0) {
+        state.headers[index].key = header.key;
+        state.headers[index].value = header.value;
+      }
     },
   },
 });
 
-export const { setQuery, setQueryBody, setQueryVariables, addQueryHeader, deleteQueryHeader } =
-  graphQlQuerySlice.actions;
+export const {
+  setQuery,
+  setQueryBody,
+  setQueryVariables,
+  setQueryHeaders,
+  addQueryHeader,
+  updateQueryHeader,
+  deleteQueryHeader,
+} = graphQlQuerySlice.actions;
 
 export const selectGraphQlQuery = (state: RootState) => state.graphQlQuery;
 
