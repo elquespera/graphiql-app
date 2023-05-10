@@ -1,10 +1,10 @@
-import { MouseEvent, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
-import Variables from './Variables';
-import GraphQLHeaders from './GraphQLHeaders';
+import { MouseEvent, useState } from 'react';
+import QueryVariables from './QueryVariables';
+import QueryHeaders from './QueryHeaders';
 
-export default function Sidebar() {
+export default function QueryOptions() {
   const [showSection, setShowSection] = useState(false);
   const [showVars, setShowVars] = useState(false);
   const [showHeaders, setShowHeaders] = useState(false);
@@ -45,7 +45,7 @@ export default function Sidebar() {
             className={`${
               showVars ? 'text-gray-300 bg-gray-800' : ''
             } hover:bg-gray-800 p-2 rounded-lg`}
-            onClick={(e) => handleShowSection(e)}
+            onClick={handleShowSection}
             aria-label="vars"
           >
             Variables
@@ -55,14 +55,14 @@ export default function Sidebar() {
             className={`${
               showHeaders ? 'text-gray-300 bg-gray-800' : ''
             } hover:bg-gray-800 p-2 rounded-lg`}
-            onClick={(e) => handleShowSection(e)}
+            onClick={handleShowSection}
             aria-label="headers"
           >
             Headers
           </button>
         </div>
         <button
-          onClick={(e) => handleShowSection(e)}
+          onClick={handleShowSection}
           aria-label="caret"
           className={`${showSection ? 'text-gray-200' : ''} hover:bg-gray-800 p-2 rounded-lg`}
         >
@@ -81,8 +81,8 @@ export default function Sidebar() {
         id="accordion-collapse-body1"
         aria-labelledby="accordion-collapse-head"
       >
-        {showVars && <Variables />}
-        {showHeaders && <GraphQLHeaders />}
+        {showVars && <QueryVariables />}
+        {showHeaders && <QueryHeaders />}
       </Transition>
     </div>
   );

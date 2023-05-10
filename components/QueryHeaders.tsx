@@ -16,9 +16,9 @@ export default function QueryHeaders() {
   };
 
   return (
-    <div className="bg-slate-950 flex-1 p-4 flex flex-col">
+    <div className="bg-slate-950 flex-1 p-4 flex flex-col border-[1px] border-t-0 border-slate-700 focus:border-slate-700 h-full">
       <h3>Headers</h3>
-      <div className="flex-1 flex flex-col overflow-y-scroll mt-2">
+      <div className="flex-1 flex flex-col mt-2 overflow-auto">
         <ul className="flex flex-col gap-4">
           {Object.entries(headers).map(([key, value]) => (
             <li key={key} className="relative flex">

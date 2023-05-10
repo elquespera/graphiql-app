@@ -1,12 +1,11 @@
-import Head from 'next/head';
-import { selectAuth } from '@/redux/auth';
-import { useAppSelector } from '@/redux/hooks';
-import useTranslation from '@/hooks/useTranslation';
 import Documentation from '@/components/Documentation';
 import Operations from '@/components/Operations';
-import QueryHeaders from '@/components/QueryHeaders';
+import QueryOptions from '@/components/QueryOptions';
 import Response from '@/components/Response';
-import Sidebar from '@/components/Sidebar/Sidebar';
+import useTranslation from '@/hooks/useTranslation';
+import { selectAuth } from '@/redux/auth';
+import { useAppSelector } from '@/redux/hooks';
+import Head from 'next/head';
 
 export default function EditorPage() {
   const t = useTranslation();
@@ -26,7 +25,7 @@ export default function EditorPage() {
           <section className="flex-1 flex flex-col justify-between basis-[40rem] md:basis-auto">
             <Operations />
             <div className="md:flex md:items-end md:flex-1">
-              <Sidebar />
+              <QueryOptions />
             </div>
           </section>
           <Response />
