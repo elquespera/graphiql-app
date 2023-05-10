@@ -17,7 +17,6 @@ export default function Response() {
 
   return (
     <div className="flex-1 p-4 md:pb-footer flex flex-col">
-      <h1>Response</h1>
       <div className="flex flex-col">
         <div className="flex gap-2">
           <FlatButton round onClick={handleSubmit}>
@@ -35,7 +34,7 @@ export default function Response() {
           ) : data ? (
             JSON.stringify(data, null, ' ')
           ) : (
-            'Click Submit to fetch data'
+            'Click fetch data'
           )}
         </pre>
       </div>

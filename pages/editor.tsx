@@ -1,5 +1,5 @@
 import Documentation from '@/components/Documentation';
-import Operations from '@/components/Operations';
+import QueryBody from '@/components/QueryBody';
 import QueryOptions from '@/components/QueryOptions';
 import Response from '@/components/Response';
 import useTranslation from '@/hooks/useTranslation';
@@ -23,7 +23,7 @@ export default function EditorPage() {
         <div className="flex flex-col md:flex-row h-full md:h-[calc(100vh-theme(spacing.footer)-theme(spacing.header))] justify-between">
           <Documentation />
           <section className="flex-1 flex flex-col justify-between basis-[40rem] md:basis-auto">
-            <Operations />
+            <QueryBody />
             <div className="md:flex md:items-end md:flex-1">
               <QueryOptions />
             </div>

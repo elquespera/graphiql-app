@@ -3,8 +3,11 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
 import { MouseEvent, useState } from 'react';
 import QueryVariables from './QueryVariables';
 import QueryHeaders from './QueryHeaders';
+import useTranslation from '@/hooks/useTranslation';
 
 export default function QueryOptions() {
+  const t = useTranslation();
+
   const [showSection, setShowSection] = useState(false);
   const [showVars, setShowVars] = useState(false);
   const [showHeaders, setShowHeaders] = useState(false);
@@ -48,7 +51,7 @@ export default function QueryOptions() {
             onClick={handleShowSection}
             aria-label="vars"
           >
-            Variables
+            {t('variables')}
           </button>
           <button
             type="button"
@@ -58,7 +61,7 @@ export default function QueryOptions() {
             onClick={handleShowSection}
             aria-label="headers"
           >
-            Headers
+            {t('headers')}
           </button>
         </div>
         <button
