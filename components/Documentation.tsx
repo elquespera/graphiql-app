@@ -23,10 +23,10 @@ export default function Documentation() {
         leaveTo="h-0 md:w-0"
         id="accordion-collapse-body1"
         aria-labelledby="accordion-collapse-head"
-        className="p-4 flex flex-col md:h-full"
+        className="flex flex-col md:h-full"
       >
-        <h1>Documentation</h1>
-        <div className="flex-1 mt-2">for documentation here</div>
+        <h1 className="m-4">Documentation</h1>
+        <div className="m-4 flex-1 mt-2">for documentation here</div>
       </Transition>
     </>
   );
