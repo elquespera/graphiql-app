@@ -35,7 +35,6 @@ export default function QueryHeaders() {
 
   return (
     <div className="bg-slate-950 flex-1 p-4 flex flex-col border-[1px] border-t-0 border-slate-700 focus:border-slate-700 h-full">
-      <h3>Headers</h3>
       <ul className="flex flex-col p-1 overflow-auto">
         {headers.map((header) => (
           <HeaderEntry
