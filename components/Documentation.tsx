@@ -17,9 +17,9 @@ export default function Documentation() {
         show={showDocs}
         enter="transition-all ease duration-200"
         enterFrom="h-0 md:w-0 "
-        enterTo="h-96 md:w-96"
+        enterTo="h-96 md:w-48 xl:w-96"
         leave="transition-all ease duration-200"
-        leaveFrom="h-96 md:w-96"
+        leaveFrom="h-96 md:w-48 xl:w-96"
         leaveTo="h-0 md:w-0"
         id="accordion-collapse-body1"
         aria-labelledby="accordion-collapse-head"

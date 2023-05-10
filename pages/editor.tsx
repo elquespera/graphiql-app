@@ -20,9 +20,9 @@ export default function EditorPage() {
       </Head>
 
       <section className="mb-6 bg-slate-900 text-slate-300 ">
-        <div className="flex flex-col md:flex-row h-full md:h-[calc(100vh-6rem)] justify-between">
+        <div className="flex flex-col md:flex-row h-full md:h-[calc(100vh-theme(spacing.footer)-theme(spacing.header))] justify-between">
           <Documentation />
-          <section className="flex-[2] flex flex-col justify-between basis-[40rem] md:basis-auto">
+          <section className="flex-1 flex flex-col justify-between basis-[40rem] md:basis-auto">
             <Operations />
             <div className="md:flex md:items-end md:flex-1">
               <Sidebar />
