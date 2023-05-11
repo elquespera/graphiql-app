@@ -1,11 +1,11 @@
+import Head from 'next/head';
+import { selectAuth } from '@/redux/auth';
+import { useAppSelector } from '@/redux/hooks';
+import useTranslation from '@/hooks/useTranslation';
 import Documentation from '@/components/Documentation';
 import Operations from '@/components/Operations';
 import Response from '@/components/Response';
-import Variables from '@/components/Variables';
-import useTranslation from '@/hooks/useTranslation';
-import { selectAuth } from '@/redux/auth';
-import { useAppSelector } from '@/redux/hooks';
-import Head from 'next/head';
+import Sidebar from '@/components/Sidebar/Sidebar';
 
 export default function EditorPage() {
   const t = useTranslation();
@@ -20,12 +20,13 @@ export default function EditorPage() {
       </Head>
 
       <section className="mb-6 bg-slate-900 text-slate-300 ">
-        <div className="flex flex-col md:flex-row gap-2 h-[calc(100vh-6rem)] justify-between">
+        <div className="flex flex-col md:flex-row h-full md:h-[calc(100vh-theme(spacing.footer)-theme(spacing.header))] justify-between">
           <Documentation />
-          <section className="flex-[2] flex flex-col justify-between">
+          <section className="flex-1 flex flex-col justify-between basis-[40rem] md:basis-auto">
             <Operations />
-            <hr className="border-slate-700" />
-            <Variables />
+            <div className="md:flex md:items-end md:flex-1">
+              <Sidebar />
+            </div>
           </section>
           <Response />
         </div>
