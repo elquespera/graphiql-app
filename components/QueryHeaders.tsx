@@ -90,7 +90,7 @@ function HeaderEntry({ data, onDelete, onUpdate }: HeaderEntryProps) {
   }, [data]);
 
   return (
-    <li className="group relative grid grid-cols-[1fr,1fr,auto,auto] gap-1">
+    <li className="group relative grid grid-cols-[1fr,1fr,auto] gap-1">
       <input
         name="key"
         className="text-inherit min-w-min px-2 py-1 bg-inherit"
@@ -110,11 +110,7 @@ function HeaderEntry({ data, onDelete, onUpdate }: HeaderEntryProps) {
         onBlur={handleUpdate}
         onChange={handleValueChange}
       />
-      <FlatButton
-        round
-        className="group-focus-within:opacity-100 opacity-0"
-        onClick={() => onDelete(data.id)}
-      >
+      <FlatButton round onClick={() => onDelete(data.id)}>
         <TrashIcon className="w-5 h-5" />
       </FlatButton>
     </li>

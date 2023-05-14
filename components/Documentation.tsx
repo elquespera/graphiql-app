@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import useTranslation from '@/hooks/useTranslation';
 import { Transition } from '@headlessui/react';
 import { DocumentIcon } from '@heroicons/react/24/solid';
-import FlatButton from './FlatButton';
-import useTranslation from '@/hooks/useTranslation';
+import { useState } from 'react';
 
 export default function Documentation() {
   const t = useTranslation();
