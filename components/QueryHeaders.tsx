@@ -1,3 +1,4 @@
+import useTranslation from '@/hooks/useTranslation';
 import {
   addQueryHeader,
   deleteQueryHeader,
@@ -6,11 +7,10 @@ import {
   updateQueryHeader,
 } from '@/redux/graphQlQuery';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { CheckIcon, MinusCircleIcon, PlusCircleIcon, TrashIcon } from '@heroicons/react/24/solid';
-import FlatButton from './FlatButton';
-import React, { useEffect, useState } from 'react';
 import { QueryHeader } from '@/types/types';
-import useTranslation from '@/hooks/useTranslation';
+import { MinusCircleIcon, PlusCircleIcon, TrashIcon } from '@heroicons/react/24/solid';
+import React, { useEffect, useRef, useState } from 'react';
+import FlatButton from './FlatButton';
 
 export default function QueryHeaders() {
   const t = useTranslation();
@@ -36,9 +36,10 @@ export default function QueryHeaders() {
   return (
     <div className="bg-slate-950 flex-1 p-4 flex flex-col border-[1px] border-t-0 border-slate-700 focus:border-slate-700 h-full">
       <ul className="flex flex-col p-1 overflow-auto">
-        {headers.map((header) => (
+        {headers.map((header, index) => (
           <HeaderEntry
             key={header.id}
+            last={index === headers.length - 1}
             data={header}
             onDelete={handleDeleteHeader}
             onUpdate={handleUpdateHeader}
@@ -62,15 +63,17 @@ export default function QueryHeaders() {
 
 interface HeaderEntryProps {
   data: QueryHeader;
+  last?: boolean;
   onDelete: (id: string) => void;
   onUpdate: (id: string, key: string, value: string) => void;
 }
 
-function HeaderEntry({ data, onDelete, onUpdate }: HeaderEntryProps) {
+function HeaderEntry({ data, last, onDelete, onUpdate }: HeaderEntryProps) {
   const t = useTranslation();
 
   const [key, setKey] = useState(data.key);
   const [value, setValue] = useState(data.value);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKey(e.target.value);
@@ -89,11 +92,18 @@ function HeaderEntry({ data, onDelete, onUpdate }: HeaderEntryProps) {
     setValue(data.value);
   }, [data]);
 
+  useEffect(() => {
+    if (last) {
+      inputRef.current?.focus();
+    }
+  }, [inputRef, last]);
+
   return (
     <li className="group relative grid grid-cols-[1fr,1fr,auto] gap-1">
       <input
         name="key"
         className="text-inherit min-w-min px-2 py-1 bg-inherit"
+        ref={inputRef}
         value={key}
         size={3}
         pattern=".*"
