@@ -1,7 +1,7 @@
 import { selectGraphQlQuery, setQueryVariables } from '@/redux/graphQlQuery';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 
-export default function Variables() {
+export default function QueryVariables() {
   const dispatch = useAppDispatch();
   const { variables } = useAppSelector(selectGraphQlQuery);
 
@@ -11,7 +11,7 @@ export default function Variables() {
 
   return (
     <textarea
-      className="border-gray-700 focus:border-gray-700 w-full h-full bg-inherit text-inherit resize-none focus:ring-4 focus:ring-gray-800"
+      className="border-slate-700 focus:border-slate-700 border-t-0 w-full h-full bg-inherit text-inherit resize-none focus:ring-4 focus:ring-slate-800"
       value={variables}
       onChange={handleChange}
     />

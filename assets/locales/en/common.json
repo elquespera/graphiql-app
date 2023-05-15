@@ -23,6 +23,14 @@
   "do-not-have-account": "Do not have an account yet?",
 
   "login-error": "An error have occured. Please try again.",
-  "login-invalid-credentials": "Invalid email or password. Please try again."
+  "login-invalid-credentials": "Invalid email or password. Please try again.",
 
+  "variables": "Variables",
+  "headers": "Headers",
+  "key": "key",
+  "value": "value",
+  "add-header": "Add header",
+  "clear-all": "Clear all",
+  "query": "Query",
+  "doc-explorer": "Doc Explorer"
 }
