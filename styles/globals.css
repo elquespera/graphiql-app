@@ -45,6 +45,10 @@
   border: 1px solid #334155;
 }
 
+.cm-variables .cm-editor {
+  border-top: 0;
+}
+
 .cm-editor.cm-focused {
   outline: 4px solid #1e293b;
 }
