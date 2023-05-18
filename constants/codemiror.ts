@@ -11,7 +11,7 @@ export const codemirrorTheme = createTheme({
   styles: [
     { tag: t.comment, color: '#919EAD' },
     { tag: t.variableName, color: '#29b973' },
-    { tag: t.name, color: '#eb34c9' },
+    { tag: t.name, color: '#ed3a34' },
     { tag: t.labelName, color: '#eb34c9' },
     { tag: t.typeName, color: '#919EAD' },
     { tag: t.operator, color: '#919EAD' },
