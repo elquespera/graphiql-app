@@ -1,11 +1,19 @@
+import { SCHEMA_QUERY } from '@/constants/schemaQuery';
 import useTranslation from '@/hooks/useTranslation';
+import { useLazyGraphQLQuery } from '@/redux/graphQlResponse';
 import { Transition } from '@headlessui/react';
 import { DocumentIcon } from '@heroicons/react/24/solid';
-import { useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
+import Spinner from './Spinner';
 
 export default function Documentation() {
   const t = useTranslation();
-  const [showDocs, setShowDocs] = useState(false);
+  const [showDocs, setShowDocs] = useState(true);
+  const [fetchSchema, { data, error }] = useLazyGraphQLQuery();
+
+  useEffect(() => {
+    fetchSchema({ query: SCHEMA_QUERY });
+  }, []);
   return (
     <>
       <button
@@ -28,7 +36,13 @@ export default function Documentation() {
         className="flex flex-col md:h-full"
       >
         <h3 className="m-4">{t('doc-explorer')}</h3>
-        <div className="m-4 flex-1 mt-2">for documentation here</div>
+        <pre className="mt-2 break-all whitespace-pre-wrap overflow-y-auto h-[calc(100vh-12rem)]">
+          <Suspense fallback={<Spinner />}>
+            {data && JSON.stringify(data, null, ' ')}
+            Loaded
+            {error && JSON.stringify(data, null, ' ')}
+          </Suspense>
+        </pre>
       </Transition>
     </>
   );

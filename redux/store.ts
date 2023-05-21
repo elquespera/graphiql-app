@@ -4,9 +4,8 @@ import { authReducer } from './auth';
 import { graphQlQueryReducer } from './graphQlQuery';
 import { graphQlResponseSlice } from './graphQlResponse';
 import { settingsReducer, settingsSlice } from './settings';
-
-import { createWrapper } from 'next-redux-wrapper';
 import { COOKIE_MAX_AGE, LANGUAGE_COOKIE } from '@/constants/constants';
+import { createWrapper } from 'next-redux-wrapper';
 
 const makeStore = wrapMakeStore(() =>
   configureStore({

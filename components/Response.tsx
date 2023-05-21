@@ -1,5 +1,5 @@
 import { selectGraphQlQuery } from '@/redux/graphQlQuery';
-import { useGraphQLMutation } from '@/redux/graphQlResponse';
+import { useLazyGraphQLQuery } from '@/redux/graphQlResponse';
 import { useAppSelector } from '@/redux/hooks';
 import { ClipboardIcon, PlayCircleIcon } from '@heroicons/react/24/solid';
 import FlatButton from './FlatButton';
@@ -11,7 +11,7 @@ import { codemirrorTheme, basicSetup } from '@/constants/codemiror';
 
 export default function Response() {
   const query = useAppSelector(selectGraphQlQuery);
-  const [queryGraphQL, { data, error, isError, isLoading }] = useGraphQLMutation();
+  const [queryGraphQL, { data, error, isError, isLoading }] = useLazyGraphQLQuery();
 
   const errorMsg = error && 'data' in error ? JSON.stringify(error.data, null, ' ') : '';
 
