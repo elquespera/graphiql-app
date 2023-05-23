@@ -31,14 +31,14 @@ export default function LanguageSwitch({ className, ...props }: LanguageSwitchPr
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 md:right-0 max-h-60 min-w-[8rem] overflow-auto rounded-md bg-slate-950  py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute mt-1 md:right-0 max-h-60 min-w-[8rem] overflow-auto rounded-md bg-slate-600 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
               {Object.entries(LANGUAGE_NAMES).map(([lang, name]) => (
                 <Listbox.Option
                   key={lang}
                   className={({ active }) =>
                     clsx(
                       `relative cursor-default select-none py-2 pl-10 pr-4`,
-                      active ? 'bg-indigo-800 text-white' : 'text-slate-100'
+                      active ? 'bg-indigo-600 text-white' : 'text-slate-100'
                     )
                   }
                   value={lang}

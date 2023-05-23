@@ -1,11 +1,12 @@
+import { DEFAULT_API_URL } from '@/constants/apiUrls';
+import { ApiUrlInfo, IGraphQLQuery, QueryHeader } from '@/types/types';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
-import { IGraphQLQuery, QueryHeader } from '@/types/types';
-import { QUERY_EXAMPLE, VARIABLES_EXAMPLE } from '@/constants/exampleQuery';
 
 const initialState: IGraphQLQuery = {
-  query: QUERY_EXAMPLE,
-  variables: VARIABLES_EXAMPLE,
+  url: DEFAULT_API_URL.url,
+  query: DEFAULT_API_URL.exampleQuery || '',
+  variables: DEFAULT_API_URL.exampleVariables,
   headers: [],
 };
 
@@ -13,9 +14,13 @@ export const graphQlQuerySlice = createSlice({
   name: 'graphQlQuery',
   initialState,
   reducers: {
-    setQuery: (state, { payload }: PayloadAction<IGraphQLQuery>) => {
-      state.query = payload.query;
-      state.variables = payload.variables;
+    setQueryUrl: (
+      state,
+      { payload: { url, exampleQuery, exampleVariables } }: PayloadAction<ApiUrlInfo>
+    ) => {
+      state.url = url;
+      state.query = exampleQuery || '';
+      state.variables = exampleVariables;
     },
 
     setQueryBody: (state, { payload }: PayloadAction<string>) => {
@@ -54,7 +59,7 @@ export const graphQlQuerySlice = createSlice({
 });
 
 export const {
-  setQuery,
+  setQueryUrl,
   setQueryBody,
   setQueryVariables,
   setQueryHeaders,

@@ -1,12 +1,11 @@
-import { API_BASE_URL } from '@/constants/constants';
+import { selectGraphQlQuery } from '@/redux/graphQlQuery';
+import { useAppSelector } from '@/redux/hooks';
 import { IGraphQLQueryPartial } from '@/types/types';
 import axios, { AxiosHeaders } from 'axios';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
 
-export const api = axios.create({ baseURL: API_BASE_URL });
-
-async function fetcher({ query, variables, headers }: IGraphQLQueryPartial) {
+async function fetcher({ url, query, variables, headers }: IGraphQLQueryPartial) {
   let result = undefined;
   let response;
   const axiosHeaders = new AxiosHeaders();
@@ -16,6 +15,7 @@ async function fetcher({ query, variables, headers }: IGraphQLQueryPartial) {
     .forEach(([key, value]) => (axiosHeaders[key] = value));
 
   try {
+    const api = axios.create({ baseURL: url });
     response = await api.post<object>('/', { query, variables }, { headers: axiosHeaders });
     result = response.data;
   } catch (e) {
@@ -34,9 +34,13 @@ async function fetcher({ query, variables, headers }: IGraphQLQueryPartial) {
 }
 
 export function useGraphQlQuery(query: IGraphQLQueryPartial) {
-  return useSWR<object>(query, fetcher, { suspense: true });
+  const { url } = useAppSelector(selectGraphQlQuery);
+
+  return useSWR<object>({ ...query, url }, fetcher, { suspense: true });
 }
 
 export function useGraphQlMutation(query: IGraphQLQueryPartial) {
-  return useSWRMutation<object>(query, fetcher);
+  const { url } = useAppSelector(selectGraphQlQuery);
+
+  return useSWRMutation<object>({ ...query, url }, fetcher);
 }

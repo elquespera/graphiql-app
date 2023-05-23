@@ -30,14 +30,15 @@ export default function Documentation() {
 
 function Docs() {
   const t = useTranslation();
-  const { data, error } = useGraphQlQuery({ query: SCHEMA_QUERY, headers: [] });
+  const { data, error } = useGraphQlQuery({ query: SCHEMA_QUERY });
 
   const [rootQuery, setRootQuery] = useState<IGraphQlType>();
   const [types, setTypes] = useState<IGraphQlType[]>();
 
   useEffect(() => {
     if (!data) return;
-    const schema = (data as IGraphQlSchema).data.__schema;
+    const schema = (data as IGraphQlSchema).data?.__schema;
+    if (!schema) return;
     const rootName = schema.queryType.name;
 
     setRootQuery(schema.types.find(({ name }) => name === rootName));
