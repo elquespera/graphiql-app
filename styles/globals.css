@@ -17,31 +17,31 @@
   }
 }
 
+:root {
+  --scrollbar-size: 8px;
+}
+
 ::-webkit-scrollbar {
-  width: 10px;
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background: #858585;
+  background: #64748b;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #4e4e4e;
+  background: #334155;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #242424;
+  background: #1e293b;
 }
 
-/* code mirror */
 .cm-editor {
-  /* our container wrapper for Codemirror instance */
-  flex: 1; /* expand to the maximum */
+  flex: 1;
   height: 100%;
-  position: relative; /* needed for child component .cm-scroller */
+  position: relative;
   border: 1px solid #334155;
 }
 
