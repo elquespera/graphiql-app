@@ -19,17 +19,19 @@ export default function EditorPage() {
         <title>{`${t('app-name')} - ${t('title-editor')}`}</title>
       </Head>
 
-      <div className="mb-6 bg-slate-900 text-slate-300 ">
-        <div className="flex flex-col md:flex-row h-full md:h-[calc(100vh-theme(spacing.footer)-theme(spacing.header))] justify-between">
-          <Documentation />
-          <section className="flex-1 flex flex-col justify-between basis-[40rem] md:basis-auto">
-            <QueryBody />
-            <div className="md:flex md:items-end md:flex-1">
-              <QueryOptions />
-            </div>
-          </section>
-          <Response />
-        </div>
+      <div
+        className={`
+          bg-slate-900 text-slate-300 mb-[theme(spacing.footer)] 
+            grid grid-rows-[repeat(3,max(80vh,30rem))]
+            md:grid-cols-[2fr,3fr,2fr] md:grid-rows-[calc(100vh-theme(spacing.header)-theme(spacing.footer))]
+        `}
+      >
+        <Documentation />
+        <section className="flex flex-col">
+          <QueryBody />
+          <QueryOptions />
+        </section>
+        <Response />
       </div>
     </>
   );

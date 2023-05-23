@@ -18,38 +18,36 @@ export default function Response() {
   const errorMsg = error && 'data' in error ? JSON.stringify(error.data, null, ' ') : '';
 
   return (
-    <div className="flex-1 p-4 flex flex-col">
-      <div className="flex flex-col">
-        <div className="flex gap-2">
-          <FlatButton round onClick={() => fetchResponse()}>
-            <PlayCircleIcon className="w-5 h-5" />
-          </FlatButton>
-          <FlatButton round>
-            <ClipboardIcon className="w-5 h-5" />
-          </FlatButton>
-        </div>
-        <div className="mt-2 overflow-auto">
-          {isLoading ? (
-            <Spinner large center />
-          ) : error || data ? (
-            <CodeMirror
-              className="w-full h-full cm-variables"
-              value={error ? errorMsg : JSON.stringify(data, null, ' ')}
-              extensions={error ? [json()] : [javascript()]}
-              theme={codemirrorTheme}
-              basicSetup={{
-                ...basicSetup,
-                highlightActiveLine: false,
-                highlightSelectionMatches: false,
-              }}
-              readOnly={true}
-              editable={false}
-            />
-          ) : (
-            <div className="p-2">{t('click-to-fetch')}</div>
-          )}
-        </div>
+    <section className="flex flex-col p-4 gap-4">
+      <div className="flex gap-2">
+        <FlatButton round onClick={() => fetchResponse()}>
+          <PlayCircleIcon className="w-5 h-5 md:w-7 md:h-7" />
+        </FlatButton>
+        <FlatButton round>
+          <ClipboardIcon className="w-5 h-5 md:w-7 md:h-7" />
+        </FlatButton>
       </div>
-    </div>
+      <div className="overflow-auto flex-grow">
+        {isLoading ? (
+          <Spinner large center />
+        ) : error || data ? (
+          <CodeMirror
+            className="w-full h-full cm-variables"
+            value={error ? errorMsg : JSON.stringify(data, null, ' ')}
+            extensions={error ? [json()] : [javascript()]}
+            theme={codemirrorTheme}
+            basicSetup={{
+              ...basicSetup,
+              highlightActiveLine: false,
+              highlightSelectionMatches: false,
+            }}
+            readOnly={true}
+            editable={false}
+          />
+        ) : (
+          <p className="p-2 text-center">{t('click-to-fetch')}</p>
+        )}
+      </div>
+    </section>
   );
 }
