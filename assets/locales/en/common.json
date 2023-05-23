@@ -25,6 +25,14 @@
   "login-error": "An error have occured. Please try again.",
   "login-invalid-credentials": "Invalid email or password. Please try again.",
 
+  "doc-explorer": "Docs",
+  "root-query": "Root query",
+  "all-types": "All schema types",
+  "kind": "Kind",
+  "description": "Description",
+  "enum-values": "Enum Values",
+  "fields": "Fields",
+
   "variables": "Variables",
   "headers": "Headers",
   "key": "key",
@@ -32,6 +40,5 @@
   "add-header": "Add header",
   "clear-all": "Clear all",
   "query": "Query",
-  "doc-explorer": "Doc Explorer",
   "click-to-fetch": "Click Run to fetch the GraphQL API response"
 }

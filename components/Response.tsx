@@ -21,10 +21,10 @@ export default function Response() {
     <section className="flex flex-col p-4 gap-4">
       <div className="flex gap-2">
         <FlatButton round onClick={() => fetchResponse()}>
-          <PlayCircleIcon className="w-5 h-5 md:w-7 md:h-7" />
+          <PlayCircleIcon className="w-5 h-5 text-[#de40a9]" />
         </FlatButton>
         <FlatButton round>
-          <ClipboardIcon className="w-5 h-5 md:w-7 md:h-7" />
+          <ClipboardIcon className="w-5 h-5" />
         </FlatButton>
       </div>
       <div className="overflow-auto flex-grow">
