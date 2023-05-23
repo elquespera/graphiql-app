@@ -1,11 +1,10 @@
+import { COOKIE_MAX_AGE, LANGUAGE_COOKIE } from '@/constants/constants';
 import { configureStore } from '@reduxjs/toolkit';
 import { nextReduxCookieMiddleware, wrapMakeStore } from 'next-redux-cookie-wrapper';
+import { createWrapper } from 'next-redux-wrapper';
 import { authReducer } from './auth';
 import { graphQlQueryReducer } from './graphQlQuery';
-import { graphQlResponseSlice } from './graphQlResponse';
 import { settingsReducer, settingsSlice } from './settings';
-import { COOKIE_MAX_AGE, LANGUAGE_COOKIE } from '@/constants/constants';
-import { createWrapper } from 'next-redux-wrapper';
 
 const makeStore = wrapMakeStore(() =>
   configureStore({
@@ -13,26 +12,23 @@ const makeStore = wrapMakeStore(() =>
       auth: authReducer,
       settings: settingsReducer,
       graphQlQuery: graphQlQueryReducer,
-      [graphQlResponseSlice.reducerPath]: graphQlResponseSlice.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware()
-        .prepend(
-          nextReduxCookieMiddleware({
-            subtrees: [
-              {
-                subtree: `${settingsSlice.name}.language`,
-                cookieName: LANGUAGE_COOKIE,
-                maxAge: COOKIE_MAX_AGE,
-                sameSite: true,
-                serializationFunction: String,
-                deserializationFunction: String,
-                defaultState: settingsSlice.getInitialState().language,
-              },
-            ],
-          })
-        )
-        .concat(graphQlResponseSlice.middleware),
+      getDefaultMiddleware().prepend(
+        nextReduxCookieMiddleware({
+          subtrees: [
+            {
+              subtree: `${settingsSlice.name}.language`,
+              cookieName: LANGUAGE_COOKIE,
+              maxAge: COOKIE_MAX_AGE,
+              sameSite: true,
+              serializationFunction: String,
+              deserializationFunction: String,
+              defaultState: settingsSlice.getInitialState().language,
+            },
+          ],
+        })
+      ),
   })
 );
 

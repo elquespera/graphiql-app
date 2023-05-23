@@ -11,7 +11,7 @@ import Spinner from './Spinner';
 
 export default function Response() {
   const query = useAppSelector(selectGraphQlQuery);
-  const { data, error, isMutating, trigger: fetchResponse } = useGraphQlMutation(query);
+  const { data, error, isMutating: isLoading, trigger: fetchResponse } = useGraphQlMutation(query);
 
   const errorMsg = error && 'data' in error ? JSON.stringify(error.data, null, ' ') : '';
 
@@ -27,7 +27,7 @@ export default function Response() {
           </FlatButton>
         </div>
         <pre className="mt-2 break-all whitespace-pre-wrap overflow-y-auto h-[calc(100vh-12rem)]">
-          {isMutating ? (
+          {isLoading ? (
             <Spinner />
           ) : error || data ? (
             <CodeMirror
