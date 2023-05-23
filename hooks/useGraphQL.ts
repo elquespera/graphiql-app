@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '@/constants/constants';
 import { IGraphQLQueryPartial } from '@/types/types';
-import axios, { AxiosError, AxiosHeaders } from 'axios';
+import axios, { AxiosHeaders } from 'axios';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
 
