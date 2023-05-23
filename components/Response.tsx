@@ -8,8 +8,10 @@ import { ClipboardIcon, PlayCircleIcon } from '@heroicons/react/24/solid';
 import CodeMirror from '@uiw/react-codemirror';
 import FlatButton from './FlatButton';
 import Spinner from './Spinner';
+import useTranslation from '@/hooks/useTranslation';
 
 export default function Response() {
+  const t = useTranslation();
   const query = useAppSelector(selectGraphQlQuery);
   const { data, error, isMutating: isLoading, trigger: fetchResponse } = useGraphQlMutation(query);
 
@@ -26,9 +28,9 @@ export default function Response() {
             <ClipboardIcon className="w-5 h-5" />
           </FlatButton>
         </div>
-        <pre className="mt-2 break-all whitespace-pre-wrap overflow-y-auto h-[calc(100vh-12rem)]">
+        <div className="mt-2 overflow-auto">
           {isLoading ? (
-            <Spinner />
+            <Spinner large center />
           ) : error || data ? (
             <CodeMirror
               className="w-full h-full cm-variables"
@@ -44,9 +46,9 @@ export default function Response() {
               editable={false}
             />
           ) : (
-            'Click to fetch response'
+            <div className="p-2">{t('click-to-fetch')}</div>
           )}
-        </pre>
+        </div>
       </div>
     </div>
   );

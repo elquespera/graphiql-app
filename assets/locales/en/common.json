@@ -32,5 +32,6 @@
   "add-header": "Add header",
   "clear-all": "Clear all",
   "query": "Query",
-  "doc-explorer": "Doc Explorer"
+  "doc-explorer": "Doc Explorer",
+  "click-to-fetch": "Click Run to fetch the GraphQL API response"
 }

@@ -19,7 +19,7 @@ export default function EditorPage() {
         <title>{`${t('app-name')} - ${t('title-editor')}`}</title>
       </Head>
 
-      <section className="mb-6 bg-slate-900 text-slate-300 ">
+      <div className="mb-6 bg-slate-900 text-slate-300 ">
         <div className="flex flex-col md:flex-row h-full md:h-[calc(100vh-theme(spacing.footer)-theme(spacing.header))] justify-between">
           <Documentation />
           <section className="flex-1 flex flex-col justify-between basis-[40rem] md:basis-auto">
@@ -30,7 +30,7 @@ export default function EditorPage() {
           </section>
           <Response />
         </div>
-      </section>
+      </div>
     </>
   );
 }

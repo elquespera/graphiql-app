@@ -8,10 +8,10 @@ export default function Documentation() {
   const t = useTranslation();
 
   return (
-    <div className="flex-1">
-      <h3 className="m-4">{t('doc-explorer')}</h3>
-      <pre className="mt-2 break-all whitespace-pre-wrap overflow-auto h-[calc(100vh-12rem)]">
-        <Suspense fallback={<Spinner />}>
+    <div className="flex-1 p-4">
+      <h3>{t('doc-explorer')}</h3>
+      <pre className="mt-2 break-all whitespace-pre-wrap overflow-auto h-full md:h-[calc(100vh-theme(spacing.footer)-theme(spacing.header))]">
+        <Suspense fallback={<Spinner large center />}>
           <Docs />
         </Suspense>
       </pre>
