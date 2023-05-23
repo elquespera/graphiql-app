@@ -13,7 +13,6 @@ async function fetcher({ query, variables, headers }: IGraphQLQueryPartial) {
 
   headers
     ?.map(({ key, value }) => [key.trim(), value.trim()])
-    .filter(([key]) => /^\S+$/.test(key))
     .forEach(([key, value]) => (axiosHeaders[key] = value));
 
   try {
@@ -23,7 +22,12 @@ async function fetcher({ query, variables, headers }: IGraphQLQueryPartial) {
     if (axios.isAxiosError(e)) {
       result = e.response?.data || e.request?.data;
     } else {
-      result = e;
+      if (e instanceof Error) {
+        const error = e as Error;
+        result = error.message;
+      } else {
+        result = e;
+      }
     }
   }
   return result;
