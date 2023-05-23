@@ -6,6 +6,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   href?: string;
+  target?: string;
 }
 
 export default function Button({
@@ -14,6 +15,7 @@ export default function Button({
   type,
   disabled,
   href,
+  target,
   ...props
 }: ButtonProps) {
   const cls = clsx(
@@ -27,7 +29,7 @@ export default function Button({
   );
 
   return href ? (
-    <Link href={href} className={cls}>
+    <Link href={href} className={cls} target={target}>
       {children}
     </Link>
   ) : (
