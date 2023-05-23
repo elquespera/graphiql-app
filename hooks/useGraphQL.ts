@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '@/constants/constants';
-import { IGraphQLQueryPartial, QueryHeader } from '@/types/types';
+import { IGraphQLQueryPartial } from '@/types/types';
 import axios, { AxiosHeaders } from 'axios';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
@@ -25,10 +25,10 @@ async function fetcher({ query, variables, headers }: IGraphQLQueryPartial) {
   return result;
 }
 
-export default function useGraphQlQuery(query: IGraphQLQueryPartial, manual = false) {
-  const result = manual
-    ? useSWRMutation<object>(query, fetcher)
-    : useSWR<object>(query, fetcher, { suspense: true });
+export function useGraphQlQuery(query: IGraphQLQueryPartial) {
+  return useSWR<object>(query, fetcher, { suspense: true });
+}
 
-  return result;
+export function useGraphQlMutation(query: IGraphQLQueryPartial) {
+  return useSWRMutation<object>(query, fetcher);
 }

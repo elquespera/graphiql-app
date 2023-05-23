@@ -1,29 +1,25 @@
+import { basicSetup, codemirrorTheme } from '@/constants/codemiror';
+import { useGraphQlMutation } from '@/hooks/useGraphQL';
 import { selectGraphQlQuery } from '@/redux/graphQlQuery';
-import { useLazyGraphQLQuery } from '@/redux/graphQlResponse';
 import { useAppSelector } from '@/redux/hooks';
-import { ClipboardIcon, PlayCircleIcon } from '@heroicons/react/24/solid';
-import FlatButton from './FlatButton';
-import Spinner from './Spinner';
-import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { json } from '@codemirror/lang-json';
-import { codemirrorTheme, basicSetup } from '@/constants/codemiror';
+import { ClipboardIcon, PlayCircleIcon } from '@heroicons/react/24/solid';
+import CodeMirror from '@uiw/react-codemirror';
+import FlatButton from './FlatButton';
+import Spinner from './Spinner';
 
 export default function Response() {
   const query = useAppSelector(selectGraphQlQuery);
-  const [queryGraphQL, { data, error, isError, isLoading }] = useLazyGraphQLQuery();
+  const { data, error, isMutating, trigger: fetchResponse } = useGraphQlMutation(query);
 
   const errorMsg = error && 'data' in error ? JSON.stringify(error.data, null, ' ') : '';
-
-  const handleSubmit = () => {
-    queryGraphQL(query);
-  };
 
   return (
     <div className="flex-1 p-4 flex flex-col">
       <div className="flex flex-col">
         <div className="flex gap-2">
-          <FlatButton round onClick={handleSubmit}>
+          <FlatButton round onClick={() => fetchResponse()}>
             <PlayCircleIcon className="w-5 h-5" />
           </FlatButton>
           <FlatButton round>
@@ -31,13 +27,13 @@ export default function Response() {
           </FlatButton>
         </div>
         <pre className="mt-2 break-all whitespace-pre-wrap overflow-y-auto h-[calc(100vh-12rem)]">
-          {isLoading ? (
+          {isMutating ? (
             <Spinner />
-          ) : isError || data ? (
+          ) : error || data ? (
             <CodeMirror
               className="w-full h-full cm-variables"
-              value={isError ? errorMsg : JSON.stringify(data, null, ' ')}
-              extensions={isError ? [json()] : [javascript()]}
+              value={error ? errorMsg : JSON.stringify(data, null, ' ')}
+              extensions={error ? [json()] : [javascript()]}
               theme={codemirrorTheme}
               basicSetup={{
                 ...basicSetup,

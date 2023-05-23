@@ -1,9 +1,8 @@
 import { SCHEMA_QUERY } from '@/constants/schemaQuery';
+import { useGraphQlQuery } from '@/hooks/useGraphQL';
 import useTranslation from '@/hooks/useTranslation';
 import { Suspense } from 'react';
 import Spinner from './Spinner';
-
-import useGraphQlQuery from '@/hooks/useGraphQlQuery';
 
 export default function Documentation() {
   const t = useTranslation();
