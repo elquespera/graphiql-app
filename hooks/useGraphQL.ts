@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '@/constants/constants';
 import { IGraphQLQueryPartial } from '@/types/types';
-import axios, { AxiosHeaders } from 'axios';
+import axios, { AxiosError, AxiosHeaders } from 'axios';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
 
@@ -20,7 +20,11 @@ async function fetcher({ query, variables, headers }: IGraphQLQueryPartial) {
     response = await api.post<object>('/', { query, variables }, { headers: axiosHeaders });
     result = response.data;
   } catch (e) {
-    result = e;
+    if (axios.isAxiosError(e)) {
+      result = e.response?.data || e.request?.data;
+    } else {
+      result = e;
+    }
   }
   return result;
 }
