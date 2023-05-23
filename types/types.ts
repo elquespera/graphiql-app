@@ -16,8 +16,10 @@ export interface QueryHeader {
 export interface IGraphQLQuery {
   query: string;
   variables?: string;
-  headers?: QueryHeader[];
+  headers: QueryHeader[];
 }
+
+export type IGraphQLQueryPartial = Partial<IGraphQLQuery>;
 
 export const AppLanguages = ['en', 'ru'] as const;
 
