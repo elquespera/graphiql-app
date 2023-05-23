@@ -146,14 +146,12 @@ interface GraphQlArgsProps {
 }
 
 function GraphQlArgs({ data }: GraphQlArgsProps) {
-  const t = useTranslation();
-
   return data?.length ? (
     <span>
       {`(`}
       <ul className="ml-2">
         {data.map(({ name, type, defaultValue }, index) => (
-          <li>
+          <li key={name}>
             <span className="text-indigo-400 text-base">{name}</span>
             <span>: </span>
             <span className="text-orange-400">{getGraphQlType(type)}</span>
