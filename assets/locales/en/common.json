@@ -26,7 +26,7 @@
   "login-invalid-credentials": "Invalid email or password. Please try again.",
 
   "doc-explorer": "Docs",
-  "root-query": "Root query",
+  "root-types": "Root types",
   "all-types": "All schema types",
   "kind": "Kind",
   "description": "Description",

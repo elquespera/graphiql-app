@@ -1,5 +1,5 @@
 import { Disclosure } from '@headlessui/react';
-import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/24/solid';
+import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/react/24/outline';
 
 interface AccordionProps {
   title?: string | React.ReactNode;
@@ -14,7 +14,7 @@ export default function Accordion({ title, children, className, titleClass }: Ac
       {({ open }) => (
         <div className={className}>
           <Disclosure.Button className="relative flex items-center gap-2">
-            <div className="absolute -left-[1.2em]">
+            <div className="absolute -left-[1.2em] text-slate-400">
               {open ? (
                 <MinusCircleIcon className="w-[1em] h-[1em]" />
               ) : (

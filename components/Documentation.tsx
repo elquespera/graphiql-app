@@ -49,7 +49,7 @@ function Docs() {
       <div className="flex flex-col gap-4 overflow-auto h-full px-4 py-2">
         {rootQuery && (
           <div>
-            <h4 className="font-bold text-slate-400 text-sm mb-1">{t('root-query')}</h4>
+            <h4 className="font-bold text-slate-400 text-sm mb-1">{t('root-types')}</h4>
             <ul className="flex flex-col ml-4">
               <GraphQlType data={rootQuery} />
             </ul>
@@ -81,7 +81,7 @@ function GraphQlType({ data }: GraphQlTypeProps) {
 
   return (
     <li>
-      <Accordion title={name} titleClass="text-orange-300">
+      <Accordion title={name} titleClass="text-orange-400">
         <>
           <GraphQlKeyValue name={t('kind')} value={kind} />
           <GraphQlKeyValue name={t('description')} value={description} />
