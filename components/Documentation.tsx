@@ -13,6 +13,7 @@ import Accordion from './Accordion';
 import Spinner from './Spinner';
 import getGraphQlType from '@/lib/getGraphQlType';
 import ErrorBoundary from './ErrorBoundary';
+import Code from './Code';
 
 export default function Documentation() {
   const t = useTranslation();
@@ -35,48 +36,60 @@ function Docs() {
   const t = useTranslation();
   const { data } = useGraphQlQuery({ query: SCHEMA_QUERY });
 
-  const [rootQuery, setRootQuery] = useState<IGraphQlType>();
+  const [rootTypes, setRootTypes] = useState<IGraphQlType[]>();
   const [types, setTypes] = useState<IGraphQlType[]>();
   const [error, setError] = useState<object>();
 
   useEffect(() => {
     const schema = (data as IGraphQlSchema).data?.__schema;
     if (schema) {
-      const rootName = schema.queryType.name;
-
       setError(undefined);
-      setRootQuery(schema.types.find(({ name }) => name === rootName));
-      setTypes(schema.types.filter(({ name }) => name !== rootName && !name.startsWith('__')));
+
+      const rootNames: string[] = [];
+
+      if (schema.queryType) rootNames.push(schema.queryType.name);
+      if (schema.mutationType) rootNames.push(schema.mutationType.name);
+      if (schema.subscriptionType) rootNames.push(schema.subscriptionType.name);
+
+      setRootTypes(schema.types.filter(({ name }) => rootNames.includes(name)));
+      setTypes(
+        schema.types.filter(({ name }) => !rootNames.includes(name) && !name.startsWith('__'))
+      );
     } else {
       setError(data);
-      setRootQuery(undefined);
+      setRootTypes(undefined);
       setTypes(undefined);
     }
   }, [data]);
 
   return (
     <div className="bg-slate-950 border-[1px] border-slate-700 overflow-hidden h-full">
-      <div className="flex flex-col gap-4 overflow-auto h-full px-4 py-2">
-        {rootQuery && (
-          <div>
-            <h4 className="font-bold text-slate-400 text-sm mb-1">{t('root-types')}</h4>
-            <ul className="flex flex-col ml-4">
-              <GraphQlType data={rootQuery} />
-            </ul>
-          </div>
-        )}
-        {types && (
-          <div>
-            <h4 className="font-bold text-slate-400 text-sm mb-1">{t('all-types')}</h4>
-            <ul className="flex flex-col ml-4">
-              {types.map((type) => (
-                <GraphQlType key={type.name} data={type} />
-              ))}
-            </ul>
-          </div>
-        )}
-        {error && JSON.stringify(error, null, ' ')}
-      </div>
+      {error ? (
+        <Code value={error} readOnly />
+      ) : (
+        <div className="flex flex-col gap-4 overflow-auto h-full px-4 py-2">
+          {rootTypes && (
+            <div>
+              <h4 className="font-bold text-slate-400 text-sm mb-1">{t('root-types')}</h4>
+              <ul className="flex flex-col ml-4">
+                {rootTypes.map((type) => (
+                  <GraphQlType key={type.name} data={type} />
+                ))}
+              </ul>
+            </div>
+          )}
+          {types && (
+            <div>
+              <h4 className="font-bold text-slate-400 text-sm mb-1">{t('all-types')}</h4>
+              <ul className="flex flex-col ml-4">
+                {types.map((type) => (
+                  <GraphQlType key={type.name} data={type} />
+                ))}
+              </ul>
+            </div>
+          )}{' '}
+        </div>
+      )}
     </div>
   );
 }

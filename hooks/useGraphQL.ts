@@ -35,9 +35,6 @@ export function useGraphQlQuery(query: IGraphQLQueryPartial) {
 
   return useSWR<object>({ ...query, url }, fetcher, {
     suspense: true,
-    onError(err, key, config) {
-      console.log(err);
-    },
   });
 }
 

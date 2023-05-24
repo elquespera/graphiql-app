@@ -1,8 +1,6 @@
 import { selectGraphQlQuery, setQueryVariables } from '@/redux/graphQlQuery';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import CodeMirror from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
-import { codemirrorTheme, basicSetup } from '@/constants/codemiror';
+import Code from './Code';
 
 export default function QueryVariables() {
   const dispatch = useAppDispatch();
@@ -12,14 +10,5 @@ export default function QueryVariables() {
     dispatch(setQueryVariables(value));
   };
 
-  return (
-    <CodeMirror
-      className="w-full h-full cm-variables"
-      value={variables}
-      onChange={handleChange}
-      extensions={[javascript()]}
-      theme={codemirrorTheme}
-      basicSetup={basicSetup}
-    />
-  );
+  return <Code className="cm-variables" value={variables} onChange={handleChange} />;
 }

@@ -56,7 +56,13 @@ export interface IGraphQlType {
 export interface IGraphQlSchema {
   data: {
     __schema: {
-      queryType: {
+      queryType?: {
+        name: string;
+      };
+      mutationType?: {
+        name: string;
+      };
+      subscriptionType?: {
         name: string;
       };
       types: IGraphQlType[];
