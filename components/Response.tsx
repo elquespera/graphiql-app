@@ -41,7 +41,7 @@ export default function Response() {
         {isLoading ? (
           <Spinner large center />
         ) : error || data ? (
-          <Code value={error || data} style={error ? 'json' : 'js'} readOnly={true} />
+          <Code value={error || data} readOnly />
         ) : (
           <p className="p-2 text-center">
             {t('click')}

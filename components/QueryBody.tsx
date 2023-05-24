@@ -19,12 +19,7 @@ export default function QueryBody() {
         <h3 className="font-semibold md:text-lg">{t('query')}</h3>
         <UrlSelect />
       </div>
-      <Code
-        className="flex-1 flex flex-col mt-2"
-        value={query}
-        onChange={handleChange}
-        style="js"
-      />
+      <Code className="flex-1 flex flex-col mt-2" value={query} onChange={handleChange} />
     </div>
   );
 }
