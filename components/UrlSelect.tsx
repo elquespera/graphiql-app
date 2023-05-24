@@ -1,4 +1,5 @@
 import { API_URLS, DEFAULT_API_URL } from '@/constants/apiUrls';
+import useTranslation from '@/hooks/useTranslation';
 import { setQueryUrl } from '@/redux/graphQlQuery';
 import { useAppDispatch } from '@/redux/hooks';
 import { ApiUrlInfo } from '@/types/types';
@@ -10,6 +11,7 @@ import { Fragment, useState } from 'react';
 
 export default function UrlSelect() {
   const dispatch = useAppDispatch();
+  const t = useTranslation();
 
   const [selected, setSelected] = useState(DEFAULT_API_URL);
   const [query, setQuery] = useState('');
@@ -49,9 +51,14 @@ export default function UrlSelect() {
             afterLeave={() => setQuery('')}
           >
             <Combobox.Options className="absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-md bg-slate-700 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              {query.length > 0 && (
+                <Combobox.Option value={{ id: null, url: padUrl(query) }}>{`Select ${padUrl(
+                  query
+                )}`}</Combobox.Option>
+              )}
               {filtered.length === 0 && query !== '' ? (
-                <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
-                  Nothing found.
+                <div className="relative cursor-default select-none py-2 px-4 text-slate-400">
+                  {t('nothing-found')}
                 </div>
               ) : (
                 filtered.map((url) => (
@@ -88,4 +95,9 @@ export default function UrlSelect() {
       </Combobox>
     </div>
   );
+}
+
+function padUrl(url: string) {
+  const padding = 'https://';
+  return url.startsWith(padding) ? url : `${padding}${url}`;
 }

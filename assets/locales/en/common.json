@@ -40,7 +40,8 @@
   "add-header": "Add header",
   "clear-all": "Clear all",
   "query": "Query",
-  "click-to-fetch": "Click Run to fetch the GraphQL API response",
+  "click": "Click",
+  "click-to-fetch": "to fetch the selected API response",
 
   "about": "About",
   "about-description": "GraphiQL is a web-based development tool for testing and exploring GraphQL APIs. It provides an interactive interface where developers can write and execute GraphQL queries, view the response data, and explore the API documentation. GraphiQL allows users to set query variables and headers, making it easy to test various scenarios and edge cases. It also offers features like auto-completion and syntax highlighting, which make writing GraphQL queries more efficient. Overall, GraphiQL is a powerful and user-friendly tool for testing and developing GraphQL APIs.",
@@ -53,5 +54,8 @@
   "course-requirements": "Students of the RS School from the 2022Q3, which has passed RS School Stage #2 as well as new students with practical experience and knowledge of:",
   "enroll": "Enroll",
 
-  "run-query": "Run query"
+  "run-query": "Execute Query",
+  "nothing-found": "Nothing found",
+
+  "unspecified-error": "An unspecified error has occured. Please try again later"
 }

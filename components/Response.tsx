@@ -7,23 +7,37 @@ import { javascript } from '@codemirror/lang-javascript';
 import { json } from '@codemirror/lang-json';
 import { PlayCircleIcon } from '@heroicons/react/24/solid';
 import CodeMirror from '@uiw/react-codemirror';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import FlatButton from './FlatButton';
 import Spinner from './Spinner';
 
 export default function Response() {
   const t = useTranslation();
   const query = useAppSelector(selectGraphQlQuery);
-  const { data, error, isMutating: isLoading, trigger: fetchResponse } = useGraphQlMutation(query);
+  const { data, isMutating: isLoading, trigger: fetchResponse, reset } = useGraphQlMutation(query);
 
-  const errorMsg = error && 'data' in error ? JSON.stringify(error.data, null, ' ') : '';
+  const [error, setError] = useState<object>();
 
-  useEffect(() => {}, [query.url]);
+  const handleSubmit = async () => {
+    try {
+      await fetchResponse();
+    } catch (e) {
+      if (e instanceof Object) setError(e);
+    }
+  };
+
+  useEffect(() => {
+    reset();
+  }, [query.url]);
+
+  useEffect(() => {
+    if (data) setError(undefined);
+  }, [data]);
 
   return (
     <section className="flex flex-col p-4 gap-4">
-      <FlatButton className="flex-shrink-0" onClick={() => fetchResponse()}>
-        <PlayCircleIcon className="w-5 h-5 text-fuchsia-600" />
+      <FlatButton onClick={handleSubmit}>
+        <PlayCircleIcon className="w-7 h-7 text-fuchsia-600" />
         {t('run-query')}
       </FlatButton>
       <div className="overflow-auto flex-grow">
@@ -32,7 +46,7 @@ export default function Response() {
         ) : error || data ? (
           <CodeMirror
             className="w-full h-full cm-variables"
-            value={error ? errorMsg : JSON.stringify(data, null, ' ')}
+            value={JSON.stringify(error || data, null, ' ')}
             extensions={error ? [json()] : [javascript()]}
             theme={codemirrorTheme}
             basicSetup={{
@@ -44,7 +58,13 @@ export default function Response() {
             editable={false}
           />
         ) : (
-          <p className="p-2 text-center">{t('click-to-fetch')}</p>
+          <p className="p-2 text-center">
+            {t('click')}
+            {' "'}
+            <span className="italic font-semibold text-slate-100">{t('run-query')}</span>
+            {'" '}
+            {t('click-to-fetch')}
+          </p>
         )}
       </div>
     </section>

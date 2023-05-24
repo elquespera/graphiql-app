@@ -5,8 +5,7 @@ import axios, { AxiosHeaders } from 'axios';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
 
-async function fetcher({ url, query, variables, headers }: IGraphQLQueryPartial) {
-  let result = undefined;
+export async function fetcher({ url, query, variables, headers }: IGraphQLQueryPartial) {
   let response;
   const axiosHeaders = new AxiosHeaders();
 
@@ -17,30 +16,31 @@ async function fetcher({ url, query, variables, headers }: IGraphQLQueryPartial)
   try {
     const api = axios.create({ baseURL: url });
     response = await api.post<object>('/', { query, variables }, { headers: axiosHeaders });
-    result = response.data;
+    return response.data;
   } catch (e) {
     if (axios.isAxiosError(e)) {
-      result = e.response?.data || e.request?.data;
+      return e.response?.data || e.request?.data || { error: e.message };
     } else {
       if (e instanceof Error) {
-        const error = e as Error;
-        result = error.message;
+        return { error: e.message };
       } else {
-        result = e;
+        return e;
       }
     }
   }
-  return result;
 }
 
 export function useGraphQlQuery(query: IGraphQLQueryPartial) {
   const { url } = useAppSelector(selectGraphQlQuery);
 
-  return useSWR<object>({ ...query, url }, fetcher, { suspense: true });
+  return useSWR<object>({ ...query, url }, fetcher, {
+    suspense: true,
+    onError(err, key, config) {
+      console.log(err);
+    },
+  });
 }
 
 export function useGraphQlMutation(query: IGraphQLQueryPartial) {
-  const { url } = useAppSelector(selectGraphQlQuery);
-
-  return useSWRMutation<object>({ ...query, url }, fetcher);
+  return useSWRMutation<object>(query, fetcher);
 }

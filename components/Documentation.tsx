@@ -12,6 +12,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 import Accordion from './Accordion';
 import Spinner from './Spinner';
 import getGraphQlType from '@/lib/getGraphQlType';
+import ErrorBoundary from './ErrorBoundary';
 
 export default function Documentation() {
   const t = useTranslation();
@@ -20,9 +21,11 @@ export default function Documentation() {
     <section className="flex flex-col p-4 gap-2 overflow-hidden">
       <h3 className="font-semibold md:text-lg">{t('doc-explorer')}</h3>
       <div className="overflow-hidden h-full">
-        <Suspense fallback={<Spinner large center />}>
-          <Docs />
-        </Suspense>
+        <ErrorBoundary fallback={<div>{t('unspecified-error')}</div>}>
+          <Suspense fallback={<Spinner large center />}>
+            <Docs />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </section>
   );
@@ -30,19 +33,25 @@ export default function Documentation() {
 
 function Docs() {
   const t = useTranslation();
-  const { data, error } = useGraphQlQuery({ query: SCHEMA_QUERY });
+  const { data } = useGraphQlQuery({ query: SCHEMA_QUERY });
 
   const [rootQuery, setRootQuery] = useState<IGraphQlType>();
   const [types, setTypes] = useState<IGraphQlType[]>();
+  const [error, setError] = useState<object>();
 
   useEffect(() => {
-    if (!data) return;
     const schema = (data as IGraphQlSchema).data?.__schema;
-    if (!schema) return;
-    const rootName = schema.queryType.name;
+    if (schema) {
+      const rootName = schema.queryType.name;
 
-    setRootQuery(schema.types.find(({ name }) => name === rootName));
-    setTypes(schema.types.filter(({ name }) => name !== rootName && !name.startsWith('__')));
+      setError(undefined);
+      setRootQuery(schema.types.find(({ name }) => name === rootName));
+      setTypes(schema.types.filter(({ name }) => name !== rootName && !name.startsWith('__')));
+    } else {
+      setError(data);
+      setRootQuery(undefined);
+      setTypes(undefined);
+    }
   }, [data]);
 
   return (
