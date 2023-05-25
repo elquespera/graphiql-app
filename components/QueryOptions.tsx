@@ -41,7 +41,6 @@ export default function QueryOptions() {
       <h2
         id="accordion-collapse-head"
         className="flex justify-between items-center w-full text-gray-500 p-2 border rounded-t-xl focus:ring-4 focus:ring-gray-800 border-gray-700"
-        aria-expanded="true"
         aria-controls="accordion-collapse-body"
       >
         <div className="space-x-4">

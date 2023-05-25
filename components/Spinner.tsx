@@ -1,9 +1,19 @@
-export default function Spinner() {
+import clsx from 'clsx';
+
+interface SpinnerProps {
+  large?: boolean;
+  center?: boolean;
+}
+
+export default function Spinner({ large, center }: SpinnerProps) {
   return (
-    <div role="status">
+    <div role="status" className={clsx(center && 'flex justify-center p-2')}>
       <svg
         aria-hidden={true}
-        className="w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+        className={clsx(
+          'text-gray-200 animate-spin dark:text-gray-600 fill-blue-600',
+          large ? 'w-8 h-8' : 'w-5 h-5'
+        )}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

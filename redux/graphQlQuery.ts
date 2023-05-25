@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { IGraphQLQuery, QueryHeader } from '@/types/types';
-import { QUERY_EXAMPLE, VARIABLES_EXAMPLE } from '@/constants/queryExample';
+import { QUERY_EXAMPLE, VARIABLES_EXAMPLE } from '@/constants/exampleQuery';
 
 const initialState: IGraphQLQuery = {
   query: QUERY_EXAMPLE,
