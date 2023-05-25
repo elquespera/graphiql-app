@@ -14,6 +14,7 @@ export interface QueryHeader {
 }
 
 export interface IGraphQLQuery {
+  url: string;
   query: string;
   variables?: string;
   headers: QueryHeader[];
@@ -55,7 +56,13 @@ export interface IGraphQlType {
 export interface IGraphQlSchema {
   data: {
     __schema: {
-      queryType: {
+      queryType?: {
+        name: string;
+      };
+      mutationType?: {
+        name: string;
+      };
+      subscriptionType?: {
         name: string;
       };
       types: IGraphQlType[];
@@ -68,3 +75,10 @@ export type IGraphQLQueryPartial = Partial<IGraphQLQuery>;
 export const AppLanguages = ['en', 'ru'] as const;
 
 export type AppLanguage = (typeof AppLanguages)[number];
+
+export interface ApiUrlInfo {
+  id: number;
+  url: string;
+  exampleQuery?: string;
+  exampleVariables?: string;
+}
