@@ -55,7 +55,7 @@ export default function Home() {
           <a
             href="https://pavelgrinkevich.com"
             target="_blank"
-            rel="noopener"
+            rel="noreferrer"
             className="flex flex-col items-center"
           >
             <Image src={pavelImage} alt="personal" height={100} width={100} />
@@ -65,7 +65,7 @@ export default function Home() {
           <a
             href="https://github.com/Sadullo1992"
             target="_blank"
-            rel="noopener"
+            rel="noreferrer"
             className="flex flex-col items-center"
           >
             <Image src={sadulloImage} alt="personal" height={100} width={100} />
@@ -75,7 +75,7 @@ export default function Home() {
           <a
             href="https://github.com/Tomas-Zagorskis"
             target="_blank"
-            rel="noopener"
+            rel="noreferrer"
             className="flex flex-col items-center"
           >
             <Image src={tomasImage} alt="personal" height={100} width={100} />
