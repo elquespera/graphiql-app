@@ -52,21 +52,36 @@ export default function Home() {
 
         <h2 className="text-3xl">{t('our-team')}</h2>
         <div className="mt-8 flex flex-row flex-wrap justify-center gap-5 sm:gap-12 md:gap-24">
-          <div className="flex flex-col items-center">
+          <a
+            href="https://pavelgrinkevich.com"
+            target="_blank"
+            rel="noopener"
+            className="flex flex-col items-center"
+          >
             <Image src={pavelImage} alt="personal" height={100} width={100} />
             <p className="mt-4 mb-2 text-xl">Pavel</p>
             <p>{t('team-leader')}</p>
-          </div>
-          <div className="flex flex-col items-center">
+          </a>
+          <a
+            href="https://github.com/Sadullo1992"
+            target="_blank"
+            rel="noopener"
+            className="flex flex-col items-center"
+          >
             <Image src={sadulloImage} alt="personal" height={100} width={100} />
             <p className="mt-4 mb-2 text-xl">Sadullo</p>
             <p>{t('fe-developer')}</p>
-          </div>
-          <div className="flex flex-col items-center">
+          </a>
+          <a
+            href="https://github.com/Tomas-Zagorskis"
+            target="_blank"
+            rel="noopener"
+            className="flex flex-col items-center"
+          >
             <Image src={tomasImage} alt="personal" height={100} width={100} />
             <p className="mt-4 mb-2 text-xl">Tomas</p>
             <p>{t('fe-developer')}</p>
-          </div>
+          </a>
         </div>
 
         <div className="mt-6">
