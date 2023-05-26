@@ -9,15 +9,15 @@ export default function Documentation() {
   const t = useTranslation();
 
   return (
-    <section className="flex flex-col p-4 gap-2 overflow-hidden">
-      <h3 className="font-semibold md:text-lg">{t('doc-explorer')}</h3>
-      <div className="overflow-hidden h-full">
-        <ErrorBoundary fallback={<div>{t('unspecified-error')}</div>}>
-          <Suspense fallback={<Spinner large center />}>
+    <ErrorBoundary fallback={<div>{t('unspecified-error')}</div>}>
+      <Suspense fallback={<Spinner large center />}>
+        <section className="flex flex-col p-4 gap-2 overflow-hidden">
+          <h3 className="font-semibold md:text-lg">{t('doc-explorer')}</h3>
+          <div className="overflow-hidden h-full">
             <Docs />
-          </Suspense>
-        </ErrorBoundary>
-      </div>
-    </section>
+          </div>
+        </section>
+      </Suspense>
+    </ErrorBoundary>
   );
 }

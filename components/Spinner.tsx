@@ -7,7 +7,7 @@ interface SpinnerProps {
 
 export default function Spinner({ large, center }: SpinnerProps) {
   return (
-    <div role="status" className={clsx(center && 'flex justify-center p-2')}>
+    <div role="status" className={clsx(center && 'flex justify-center place-items-center p-2')}>
       <svg
         aria-hidden={true}
         className={clsx(
