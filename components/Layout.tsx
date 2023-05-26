@@ -20,7 +20,7 @@ export default function Layout({ children }: PropsWithChildren) {
 
     if (isAuth) {
       if (AUTH_PATHS.includes(router.asPath)) {
-        router.replace('/editor');
+        router.replace('/');
       }
     } else {
       if (isPrivate) {
