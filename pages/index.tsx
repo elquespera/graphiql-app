@@ -1,4 +1,7 @@
-import { logOut, signIn } from '@/auth/firebaseAuth';
+import pavelImage from '@/assets/images/pavel.png';
+import sadulloImage from '@/assets/images/sadullo.png';
+import tomasImage from '@/assets/images/tomas.png';
+import { logOut } from '@/auth/firebaseAuth';
 import Button from '@/components/Button';
 import GraphQLIcon from '@/components/GraphQLIcon';
 import LanguageSwitch from '@/components/LanguageSwitch';
@@ -7,18 +10,11 @@ import { selectAuth } from '@/redux/auth';
 import { useAppSelector } from '@/redux/hooks';
 import Head from 'next/head';
 import Image from 'next/image';
-import pavelImage from '@/assets/images/pavel.png';
-import sadulloImage from '@/assets/images/sadullo.png';
-import tomasImage from '@/assets/images/tomas.png';
 
 export default function Home() {
   const t = useTranslation();
 
-  const { isAuth, userEmail } = useAppSelector(selectAuth);
-
-  const signInTest = () => {
-    signIn('test@email.com', '12345678');
-  };
+  const { isAuth } = useAppSelector(selectAuth);
 
   return (
     <>
@@ -27,17 +23,19 @@ export default function Home() {
       </Head>
       <section className="flex flex-col gap-8 p-4 sm:p-8 mb-footer max-w-7xl mx-auto">
         <div className="flex gap-4 sm:gap-6 items-center">
-          <LanguageSwitch className="mr-auto" />
+          <LanguageSwitch className="ml-auto" />
           {isAuth ? (
-            <Button href="/editor" className="whitespace-nowrap">
-              {t('go-to-main')}
-            </Button>
+            <>
+              <Button href="/editor" className="whitespace-nowrap">
+                {t('go-to-main')}
+              </Button>
+              <Button onClick={logOut}>{t('log-out')}</Button>
+            </>
           ) : (
             <>
               <Button href="/sign-in" className="whitespace-nowrap">
                 {t('sign-in')}
               </Button>
-              {t('or')}
               <Button href="/sign-up" className="whitespace-nowrap">
                 {t('sign-up')}
               </Button>
@@ -52,32 +50,38 @@ export default function Home() {
         <h2 className="text-3xl">{t('about')}</h2>
         <p>{t('about-description')}</p>
 
-        <div>
-          {isAuth ? (
-            <Button onClick={logOut}>Test log out</Button>
-          ) : (
-            <Button onClick={signInTest}>Test sign in</Button>
-          )}
-          {userEmail}
-        </div>
-
         <h2 className="text-3xl">{t('our-team')}</h2>
         <div className="mt-8 flex flex-row flex-wrap justify-center gap-5 sm:gap-12 md:gap-24">
-          <div className="flex flex-col items-center">
+          <a
+            href="https://pavelgrinkevich.com"
+            target="_blank"
+            rel="noreferrer"
+            className="flex flex-col items-center"
+          >
             <Image src={pavelImage} alt="personal" height={100} width={100} />
             <p className="mt-4 mb-2 text-xl">Pavel</p>
             <p>{t('team-leader')}</p>
-          </div>
-          <div className="flex flex-col items-center">
+          </a>
+          <a
+            href="https://github.com/Sadullo1992"
+            target="_blank"
+            rel="noreferrer"
+            className="flex flex-col items-center"
+          >
             <Image src={sadulloImage} alt="personal" height={100} width={100} />
             <p className="mt-4 mb-2 text-xl">Sadullo</p>
             <p>{t('fe-developer')}</p>
-          </div>
-          <div className="flex flex-col items-center">
+          </a>
+          <a
+            href="https://github.com/Tomas-Zagorskis"
+            target="_blank"
+            rel="noreferrer"
+            className="flex flex-col items-center"
+          >
             <Image src={tomasImage} alt="personal" height={100} width={100} />
             <p className="mt-4 mb-2 text-xl">Tomas</p>
             <p>{t('fe-developer')}</p>
-          </div>
+          </a>
         </div>
 
         <div className="mt-6">

@@ -2,11 +2,16 @@ export default function Footer() {
   return (
     <footer className="fixed left-0 right-0 bottom-0 w-full h-footer bg-slate-800 flex items-center">
       <div className="flex justify-between items-center text-slate-100 w-full max-w-7xl mx-auto px-4 sm:px-8">
-        <a href="https://github.com/elquespera/graphiql-app" target="_blank" rel="noreferrer">
+        <a
+          href="https://github.com/elquespera/graphiql-app"
+          title="Github"
+          target="_blank"
+          rel="noreferrer"
+        >
           {gitHubIcon()}
         </a>
         <p className="text-2xl font-bold">2023</p>
-        <a href="https://rs.school/" target="_blank" rel="noreferrer">
+        <a href="https://rs.school/" target="_blank" title="RS School" rel="noreferrer">
           {rssIcon()}
         </a>
       </div>
