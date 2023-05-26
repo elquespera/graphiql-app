@@ -19,6 +19,7 @@
   "repeat-password": "Повторите пароль",
   "email-is-required": "Требуется указать адрес электронной почты",
   "email-is-invalid": "Неверный адрес электронной почты",
+  "password-is-required": "Требуется указать пароль",
   "password-8-characters": "Минимум 8 символов",
   "password-1-letter": "Минимум 1 буква",
   "password-1-digit": "Минимум 1 цифра",

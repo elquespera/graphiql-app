@@ -19,6 +19,7 @@
   "repeat-password": "Repeat password",
   "email-is-required": "Email is required",
   "email-is-invalid": "Invalid email address",
+  "password-is-required": "Password is required",
   "password-8-characters": "At least 8 characters",
   "password-1-letter": "At least 1 letter",
   "password-1-digit": "At least 1 digit",
