@@ -16,6 +16,7 @@
 
   "email-address": "Email address",
   "password": "Password",
+  "repeat-password": "Repeat password",
   "email-is-required": "Email is required",
   "email-is-invalid": "Invalid email address",
   "password-8-characters": "At least 8 characters",
@@ -24,6 +25,7 @@
   "password-1-special-character": "At least 1 special character (!%#$ etc.)",
   "already-have-account": "Already have an account?",
   "do-not-have-account": "Do not have an account yet?",
+  "password-not-match": "Passwords do not match",
 
   "login-error": "An error have occured. Please try again.",
   "login-invalid-credentials": "Invalid email or password. Please try again.",

@@ -17,6 +17,7 @@ interface AuthFormProps {
 type IFormData = {
   email: string;
   password: string;
+  password2?: string;
 };
 
 const EMAIL_PATTERN = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -39,26 +40,30 @@ export default function AuthForm({ type }: AuthFormProps) {
   });
 
   const onSubmit: SubmitHandler<IFormData> = async (data) => {
-    const { email, password } = data;
+    const { email, password, password2 } = data;
 
     const signInOrUp = type === 'sign-up' ? signUp : signIn;
 
-    try {
-      setIsLoading(true);
-      const { error } = await signInOrUp(email, password);
-      if (error) {
-        setError(
-          error.code === AUTH_USER_NOT_FOUND || error.code === AUTH_INVALID_PASSWORD
-            ? 'login-invalid-credentials'
-            : 'login-error'
-        );
-      } else {
-        setError(undefined);
+    if (type === 'sign-up' && password !== password2) {
+      setError('password-not-match');
+    } else {
+      try {
+        setIsLoading(true);
+        const { error } = await signInOrUp(email, password);
+        if (error) {
+          setError(
+            error.code === AUTH_USER_NOT_FOUND || error.code === AUTH_INVALID_PASSWORD
+              ? 'login-invalid-credentials'
+              : 'login-error'
+          );
+        } else {
+          setError(undefined);
+        }
+      } catch {
+        setError('login-error');
+      } finally {
+        setIsLoading(false);
       }
-    } catch {
-      setError('login-error');
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -95,15 +100,35 @@ export default function AuthForm({ type }: AuthFormProps) {
             type="password"
             className="block bg-white/[.05] w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/[.1] placeholder:text-white-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             {...register('password', {
-              validate: {
-                eightCharacters: (value) => value.length > 8,
-                oneLetter: (value) => LETTER_PATTERN.test(value),
-                oneDigit: (value) => DIGIT_PATTERN.test(value),
-                oneSpecialCharacter: (value) => SPECIAL_CHAR_PATTERN.test(value),
-              },
+              validate:
+                type === 'sign-up'
+                  ? {
+                      eightCharacters: (value) => value.length > 8,
+                      oneLetter: (value) => LETTER_PATTERN.test(value),
+                      oneDigit: (value) => DIGIT_PATTERN.test(value),
+                      oneSpecialCharacter: (value) => SPECIAL_CHAR_PATTERN.test(value),
+                    }
+                  : undefined,
             })}
           />
         </div>
+        {type === 'sign-up' && (
+          <div className="my-6">
+            <div>
+              <label htmlFor="password2" className="block text-white text-sm font-medium leading-6">
+                {t('repeat-password')}
+              </label>
+            </div>
+            <div className="mt-2">
+              <input
+                id="password2"
+                type="password"
+                className="block bg-white/[.05] w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/[.1] placeholder:text-white-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                {...register('password2')}
+              />
+            </div>
+          </div>
+        )}
         {errors.password && (
           <ul className="flex flex-col gap-1 mt-2">
             <ValidationMessage
