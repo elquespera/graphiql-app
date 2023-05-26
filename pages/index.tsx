@@ -27,7 +27,7 @@ export default function Home() {
           {isAuth ? (
             <>
               <Button href="/editor" className="whitespace-nowrap">
-                {t('go-to-main')}
+                {t('go-to-editor')}
               </Button>
               <Button onClick={logOut}>{t('log-out')}</Button>
             </>

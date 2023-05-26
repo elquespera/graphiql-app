@@ -5,11 +5,14 @@
 
   "or": "or",
 
-  "go-to-main": "Go to the editor",
+  "go-to-editor": "Go to the editor",
+  "go-to-main": "Go Home",
 
   "sign-in": "Sign in",
   "sign-up": "Sign up",
   "log-out": "Log out",
+
+  "not-found": "Page Not Found",
 
   "email-address": "Email address",
   "password": "Password",
