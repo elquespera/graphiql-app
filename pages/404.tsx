@@ -10,7 +10,7 @@ export default function NotFound() {
   useEffect(() => {
     setNotFound(t('not-found'));
     setGoToMain(t('go-to-main'));
-  }, []);
+  }, [t]);
 
   return (
     <div className="flex flex-col items-center h-screen justify-center gap-16 p-4 md:p-8">
