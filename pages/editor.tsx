@@ -22,7 +22,7 @@ export default function EditorPage() {
       <div
         className={`
           bg-slate-900 text-slate-300 mb-[theme(spacing.footer)] 
-            grid grid-rows-[repeat(3,max(80vh,30rem))]
+            grid grid-rows-[.8fr,1.1fr,1fr]
             md:grid-cols-[2fr,3fr,2fr] md:grid-rows-[calc(100vh-theme(spacing.header)-theme(spacing.footer))]
         `}
       >

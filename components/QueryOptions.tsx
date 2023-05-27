@@ -73,7 +73,7 @@ export default function QueryOptions() {
         show={showSection}
         enter="transition-all ease duration-200"
         enterFrom="h-0"
-        enterTo="h-[30vh]"
+        enterTo="h-[20vh]"
         leave="transition-all ease duration-200"
         leaveFrom="h-40"
         leaveTo="h-0"

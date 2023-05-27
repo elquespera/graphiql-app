@@ -1,13 +1,14 @@
 'use client';
-import { signIn, signUp } from '@/auth/firebaseAuth';
-import useTranslation from '@/hooks/useTranslation';
-import { CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
-import clsx from 'clsx';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Spinner from './Spinner';
-import { AUTH_INVALID_PASSWORD, AUTH_USER_NOT_FOUND } from '@/constants/constants';
+import { CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/solid';
+import clsx from 'clsx';
+
+import { signIn, signUp } from '@/auth/firebaseAuth';
+import useTranslation from '@/hooks/useTranslation';
 import { TranslationKey } from '@/assets/locales/translations';
+import { AUTH_INVALID_PASSWORD, AUTH_USER_NOT_FOUND } from '@/constants/constants';
+import Spinner from './Spinner';
 import Button from './Button';
 
 interface AuthFormProps {
@@ -17,6 +18,7 @@ interface AuthFormProps {
 type IFormData = {
   email: string;
   password: string;
+  password2: string;
 };
 
 const EMAIL_PATTERN = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -27,11 +29,12 @@ const SPECIAL_CHAR_PATTERN = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 export default function AuthForm({ type }: AuthFormProps) {
   const t = useTranslation();
 
-  const [isLoadling, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<TranslationKey>();
 
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormData>({
@@ -95,17 +98,45 @@ export default function AuthForm({ type }: AuthFormProps) {
             type="password"
             className="block bg-white/[.05] w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/[.1] placeholder:text-white-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             {...register('password', {
-              validate: {
-                eightCharacters: (value) => value.length > 8,
-                oneLetter: (value) => LETTER_PATTERN.test(value),
-                oneDigit: (value) => DIGIT_PATTERN.test(value),
-                oneSpecialCharacter: (value) => SPECIAL_CHAR_PATTERN.test(value),
-              },
+              required: t('password-is-required'),
+              validate:
+                type === 'sign-up'
+                  ? {
+                      eightCharacters: (value) => value.length > 7,
+                      oneLetter: (value) => LETTER_PATTERN.test(value),
+                      oneDigit: (value) => DIGIT_PATTERN.test(value),
+                      oneSpecialCharacter: (value) => SPECIAL_CHAR_PATTERN.test(value),
+                    }
+                  : undefined,
             })}
           />
+          {errors.password && type === 'sign-in' && (
+            <span className="text-sm text-red-500">{errors.password.message}</span>
+          )}
         </div>
-        {errors.password && (
-          <ul className="flex flex-col gap-1 mt-2">
+        {type === 'sign-up' && (
+          <div className="my-6">
+            <div>
+              <label htmlFor="password2" className="block text-white text-sm font-medium leading-6">
+                {t('repeat-password')}
+              </label>
+            </div>
+            <div className="mt-2">
+              <input
+                id="password2"
+                type="password"
+                className="block bg-white/[.05] w-full rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/[.1] placeholder:text-white-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                {...register('password2', {
+                  validate: {
+                    matchPassword: (value) => value?.length > 0 && value === getValues('password'),
+                  },
+                })}
+              />
+            </div>
+          </div>
+        )}
+        {errors.password && type === 'sign-up' && (
+          <ul className="flex flex-col gap-2 mt-1">
             <ValidationMessage
               isError={!!errors.password?.types?.eightCharacters}
               message={t('password-8-characters')}
@@ -124,10 +155,18 @@ export default function AuthForm({ type }: AuthFormProps) {
             />
           </ul>
         )}
+        {errors.password2 && (
+          <ul className="flex flex-col gap-1 mt-2">
+            <ValidationMessage
+              isError={!!errors.password2?.types?.matchPassword}
+              message={t('password-not-match')}
+            />
+          </ul>
+        )}
       </div>
 
-      <Button type="submit" disabled={isLoadling} className="w-full">
-        {isLoadling && <Spinner />}
+      <Button type="submit" disabled={isLoading} className="w-full">
+        {isLoading && <Spinner />}
         {t(type === 'sign-up' ? 'sign-up' : 'sign-in')}
       </Button>
       {error && <ValidationMessage isError message={t(error)} />}
