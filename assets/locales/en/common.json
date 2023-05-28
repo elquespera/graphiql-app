@@ -1,9 +1,7 @@
 {
-  "app-name": "GraphQL",
+  "app-name": "GraphiQL",
   "title-welcome": "Welcome",
   "title-editor": "Query Editor",
-
-  "or": "or",
 
   "go-to-editor": "Go to the editor",
   "go-to-main": "Go Home",

@@ -1,9 +1,6 @@
 {
-  "app-name": "GraphQL",
   "title-welcome": "Добро пожаловать",
   "title-editor": "Редактор запросов",
-
-  "or": "или",
 
   "go-to-editor": "Перейти к редактору",
   "go-to-main": "Перейти на главную",
