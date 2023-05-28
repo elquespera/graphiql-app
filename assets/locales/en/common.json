@@ -1,0 +1,64 @@
+{
+  "app-name": "GraphiQL",
+  "title-welcome": "Welcome",
+  "title-editor": "Query Editor",
+
+  "go-to-editor": "Go to the editor",
+  "go-to-main": "Go Home",
+
+  "sign-in": "Sign in",
+  "sign-up": "Sign up",
+  "log-out": "Log out",
+
+  "not-found": "Page Not Found",
+
+  "email-address": "Email address",
+  "password": "Password",
+  "repeat-password": "Repeat password",
+  "email-is-required": "Email is required",
+  "email-is-invalid": "Invalid email address",
+  "password-is-required": "Password is required",
+  "password-8-characters": "At least 8 characters",
+  "password-1-letter": "At least 1 letter",
+  "password-1-digit": "At least 1 digit",
+  "password-1-special-character": "At least 1 special character (!%#$ etc.)",
+  "already-have-account": "Already have an account?",
+  "do-not-have-account": "Do not have an account yet?",
+  "password-not-match": "Passwords do not match",
+
+  "login-error": "An error have occured. Please try again.",
+  "login-invalid-credentials": "Invalid email or password. Please try again.",
+
+  "doc-explorer": "Docs",
+  "root-types": "Root types",
+  "all-types": "All schema types",
+  "kind": "Kind",
+  "description": "Description",
+  "enum-values": "Enum Values",
+  "fields": "Fields",
+
+  "variables": "Variables",
+  "headers": "Headers",
+  "key": "key",
+  "value": "value",
+  "add-header": "Add header",
+  "clear-all": "Clear all",
+  "query": "Query",
+  "click": "Click",
+  "click-to-fetch": "to fetch the selected API response",
+
+  "about": "About",
+  "about-description": "GraphiQL App is a web-based development tool for testing and exploring GraphQL APIs. It provides an interactive interface where developers can write and execute GraphQL queries, view the response data, and explore the API documentation. GraphiQL allows users to set query variables and headers, making it easy to test various scenarios and edge cases. It also offers features like syntax highlighting, which make writing GraphQL queries more efficient. Overall, GraphiQL is a powerful and user-friendly tool for testing and developing GraphQL APIs.",
+  "our-team": "Our Team",
+  "team-leader": "Team Leader",
+  "fe-developer": "FE Developer",
+  "react-course": "React Course",
+  "react-course-features": "Free | Online | in English",
+  "target-audience": "Target Audience",
+  "course-requirements": "Students of the RS School from the 2022Q3, which has passed RS School Stage #2 as well as new students with practical experience and knowledge of:",
+  "enroll": "Enroll",
+
+  "run-query": "Execute Query",
+
+  "unspecified-error": "An unspecified error has occured. Please try again later"
+}
